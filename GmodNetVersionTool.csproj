@@ -3,6 +3,27 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <!-- Main version of the app -->
+    <Version>0.1.0</Version>
+
+    <PackageVersion>$(Version)</PackageVersion>
+    <AssemblyVersion>$(Version).0</AssemblyVersion>
+    <FileVersion>$(AssemblyVersion)</FileVersion>
+
+    <PackageId>GmodNET.VersionTool</PackageId>
+    <Authors>Gleb Krasilich</Authors>
+    <Company>GmodNET</Company>
+    <PackageTags>GmodNET; Build Tool; Versioning</PackageTags>
+    <Description>
+      A tool to generate SemVer and MSBuild compatible version numbers from git repository and metadata.
+    </Description>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.8.0" />
+
+    <None Include="./icon.png" Pack="true" PackagePath=""/>
+  </ItemGroup>
 
 </Project>
