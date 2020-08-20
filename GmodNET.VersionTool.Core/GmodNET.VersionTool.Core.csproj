@@ -1,7 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="../version.props" />
+    
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageIcon>icon.png</PackageIcon>
+    <Product>GmodNET.VersionTool.Core class library</Product>
+    <Description>Core class library for GmodNET.VersionTool designed to be used in self-titled CLI tool or other apps/libs.</Description>
+    <Authors>GlebKrasilich; GmodNET</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>build-tool; versioning</PackageTags>
+    <RepositoryUrl>https://github.com/GmodNET/GmodNetVersionTool</RepositoryUrl>
+    <Company>GmodNET</Company>
+    <Copyright>Copyright (c) 2020 GmodNET</Copyright>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <Content Include="../icon.png" PackagePath="/" />
+  </ItemGroup>
 
 </Project>
