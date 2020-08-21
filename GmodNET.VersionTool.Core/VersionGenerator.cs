@@ -6,6 +6,7 @@ using LibGit2Sharp;
 using LibGit2Sharp.Handlers;
 using System.Text;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace GmodNET.VersionTool.Core
 {
@@ -52,6 +53,9 @@ namespace GmodNET.VersionTool.Core
             using(Repository repo = new Repository(version_file_info.DirectoryName))
             {
                 StringBuilder version_string_builder = new StringBuilder();
+
+                Regex non_semver_characters_regex = new Regex(@"[^0-9A-Za-z-]+", RegexOptions.ECMAScript | RegexOptions.Compiled);
+                string normalized_head_name = non_semver_characters_regex.Replace(repo.Head.FriendlyName, "-");
                 
                 version_string_builder.Append(version_from_file.Major);
                 version_string_builder.Append('.');
@@ -79,7 +83,19 @@ namespace GmodNET.VersionTool.Core
                     version_string_builder.Append('.');
                     version_string_builder.Append(commit_time.Second);
 
-                    
+                    version_string_builder.Append('.');
+                    version_string_builder.Append(normalized_head_name);
+                }
+
+                version_string_builder.Append('+');
+
+                Regex codename_regex = new Regex(@"^[0-9A-Za-z-]+$", RegexOptions.ECMAScript | RegexOptions.Compiled);
+                if(versionStruct.Codename != null && versionStruct.Codename != String.Empty && codename_regex.IsMatch(versionStruct.Codename))
+                {
+                    version_string_builder.Append("codename");
+                    version_string_builder.Append('.');
+                    version_string_builder.Append(versionStruct.Codename);
+                    version_string_builder.Append('.');
                 }
             }
         }
