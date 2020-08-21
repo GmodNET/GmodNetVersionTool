@@ -63,10 +63,10 @@ namespace GmodNET.VersionTool.Core
                 {
                     version_string_builder.Append('-');
                     version_string_builder.Append(version_from_file.Prerelease);
-                    version_string_builder.Append('.');
 
                     DateTime commit_time = repo.Head.Tip.Committer.When.UtcDateTime;
 
+                    version_string_builder.Append('.');
                     version_string_builder.Append(commit_time.Year);
                     version_string_builder.Append('.');
                     version_string_builder.Append(commit_time.Month);
@@ -79,7 +79,7 @@ namespace GmodNET.VersionTool.Core
                     version_string_builder.Append('.');
                     version_string_builder.Append(commit_time.Second);
 
-                    repo.Head.Ca
+                    
                 }
             }
         }
