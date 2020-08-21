@@ -52,10 +52,12 @@ namespace GmodNET.VersionTool.Core
 
             using(Repository repo = new Repository(version_file_info.DirectoryName))
             {
+                branch_name = repo.Head.FriendlyName;
+
                 StringBuilder version_string_builder = new StringBuilder();
 
                 Regex non_semver_characters_regex = new Regex(@"[^0-9A-Za-z-]+", RegexOptions.ECMAScript | RegexOptions.Compiled);
-                string normalized_head_name = non_semver_characters_regex.Replace(repo.Head.FriendlyName, "-");
+                string normalized_head_name = non_semver_characters_regex.Replace(branch_name, "-");
                 
                 version_string_builder.Append(version_from_file.Major);
                 version_string_builder.Append('.');
@@ -97,6 +99,17 @@ namespace GmodNET.VersionTool.Core
                     version_string_builder.Append(versionStruct.Codename);
                     version_string_builder.Append('.');
                 }
+
+                version_string_builder.Append("head");
+                version_string_builder.Append('.');
+                version_string_builder.Append(normalized_head_name);
+                version_string_builder.Append('.');
+                version_string_builder.Append("commit");
+                version_string_builder.Append('.');
+                
+                commit_hash = repo.Head.Tip.Sha.Substring(0, 7);
+
+                version_string_builder.Append(commit_hash);
             }
         }
     }
