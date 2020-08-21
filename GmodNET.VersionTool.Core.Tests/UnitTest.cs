@@ -6,9 +6,9 @@ namespace GmodNET.VersionTool.Core.Tests
     public class UnitTest
     {
         [Fact]
-        public void Test1()
+        public void FullVersionTest1()
         {
-
+            
         }
     }
 }
