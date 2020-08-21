@@ -110,6 +110,14 @@ namespace GmodNET.VersionTool.Core
                 commit_hash = repo.Head.Tip.Sha.Substring(0, 7);
 
                 version_string_builder.Append(commit_hash);
+
+                if(version_from_file.Build != null && version_from_file.Build != String.Empty)
+                {
+                    version_string_builder.Append('.');
+                    version_string_builder.Append(version_from_file.Build);
+                }
+
+                full_version = version_string_builder.ToString();
             }
         }
     }
