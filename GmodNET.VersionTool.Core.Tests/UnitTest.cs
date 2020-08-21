@@ -3,7 +3,7 @@ using Xunit;
 
 namespace GmodNET.VersionTool.Core.Tests
 {
-    public class UnitTest1
+    public class UnitTest
     {
         [Fact]
         public void Test1()
