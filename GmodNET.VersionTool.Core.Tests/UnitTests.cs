@@ -14,5 +14,13 @@ namespace GmodNET.VersionTool.Core.Tests
 
             Assert.Equal("1.1.1", version_generator.FullVersion.Split('+')[0]);
         }
+
+        [Fact]
+        public void Test2()
+        {
+            VersionGenerator version_generator = new VersionGenerator("Test2.version.json");
+
+            Assert.Equal("2.2.2", version_generator.FullVersion.Split('+')[0]);
+        }
     }
 }
