@@ -10,7 +10,7 @@ namespace GmodNET.VersionTool.Core.Tests
         [Fact]
         public void FullVersionTest1()
         {
-            VersionGenerator version_generator = new VersionGenerator("../../../Test1.version.json");
+            VersionGenerator version_generator = new VersionGenerator("Test1.version.json");
         }
     }
 }
