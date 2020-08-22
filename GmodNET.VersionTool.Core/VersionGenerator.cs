@@ -45,7 +45,7 @@ namespace GmodNET.VersionTool.Core
 
             SemVersion version_from_file;
 
-            if(versionStruct.Version == null || versionStruct.Version == String.Empty || !SemVersion.TryParse(versionStruct.Version, out version_from_file))
+            if(versionStruct.Version == null || versionStruct.Version == String.Empty || !SemVersion.TryParse(versionStruct.Version, out version_from_file, true))
             {
                 throw new ArgumentException("Version JSON file does not contain proper Version value", "path_to_version_file");
             }

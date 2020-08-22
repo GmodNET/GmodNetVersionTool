@@ -5,12 +5,14 @@ using GmodNET.VersionTool.Core;
 
 namespace GmodNET.VersionTool.Core.Tests
 {
-    public class UnitTest
+    public class UnitTests
     {
         [Fact]
-        public void FullVersionTest1()
+        public void Test1()
         {
             VersionGenerator version_generator = new VersionGenerator("Test1.version.json");
+
+            Assert.Equal("1.1.1", version_generator.FullVersion.Split('+')[0]);
         }
     }
 }
