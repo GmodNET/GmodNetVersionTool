@@ -14,11 +14,5 @@ namespace GmodNET.VersionTool.Core.Tests
 
             Assert.Equal("1.1.1", version_generator.FullVersion.Split('+')[0]);
         }
-
-        [Fact]
-        public void FailTest()
-        {
-            Assert.True(false);
-        }
     }
 }
