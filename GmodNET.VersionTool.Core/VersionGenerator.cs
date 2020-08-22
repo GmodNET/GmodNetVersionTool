@@ -50,7 +50,14 @@ namespace GmodNET.VersionTool.Core
                 throw new ArgumentException("Version JSON file does not contain proper Version value", "path_to_version_file");
             }
 
-            using(Repository repo = new Repository(version_file_info.DirectoryName))
+            DirectoryInfo repository_directory = version_file_info.Directory;
+
+            while(!repository_directory.GetDirectories().Where(info => info.Name == ".git").Any())
+            {
+                repository_directory = repository_directory.Parent;
+            }
+
+            using(Repository repo = new Repository(repository_directory.FullName))
             {
                 branch_name = repo.Head.FriendlyName;
 

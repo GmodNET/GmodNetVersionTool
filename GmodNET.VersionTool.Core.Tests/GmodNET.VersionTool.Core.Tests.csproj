@@ -20,4 +20,10 @@
     <ProjectReference Include="..\GmodNET.VersionTool.Core\GmodNET.VersionTool.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Test1.version.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
