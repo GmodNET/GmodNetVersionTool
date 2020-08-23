@@ -75,7 +75,8 @@ namespace GmodNET.VersionTool.Core.Tests
             VersionGenerator b = new VersionGenerator("Test2.version.json");
             VersionGenerator c = new VersionGenerator("Test3.version.json");
 
-            Assert.True(SemVersion.TryParse(a.FullVersion, out _, true) && SemVersion.TryParse(b.FullVersion, out _, true) && SemVersion.TryParse(c.FullVersion, out _, true));
+            Assert.True(SemVersion.TryParse(a.FullVersion, out _, true) && SemVersion.TryParse(b.FullVersion, out _, true) 
+                && SemVersion.TryParse(c.FullVersion, out _, true));
         }
     }
 }
