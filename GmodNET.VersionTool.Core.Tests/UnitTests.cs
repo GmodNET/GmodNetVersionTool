@@ -56,5 +56,15 @@ namespace GmodNET.VersionTool.Core.Tests
 
             Assert.Equal(repo.Head.Tip.Sha.Substring(0, 7), versionGenerator.CommitHash);
         }
+
+        [Fact]
+        public void BranchTest()
+        {
+            using Repository repo = new Repository("../../../../");
+
+            VersionGenerator versionGenerator = new VersionGenerator("Test1.version.json");
+
+            Assert.Equal(repo.Head.FriendlyName, versionGenerator.BranchName);
+        }
     }
 }
