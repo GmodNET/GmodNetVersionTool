@@ -4,6 +4,8 @@ using Xunit;
 using GmodNET.VersionTool.Core;
 using System.Text.RegularExpressions;
 using System.Threading;
+using LibGit2Sharp;
+using LibGit2Sharp.Handlers;
 
 namespace GmodNET.VersionTool.Core.Tests
 {
@@ -43,6 +45,16 @@ namespace GmodNET.VersionTool.Core.Tests
             Regex codename_checker = new Regex(@"codename", RegexOptions.ECMAScript);
 
             Assert.DoesNotMatch(codename_checker, versionGenerator.FullVersion);
+        }
+
+        [Fact]
+        public void CommitHashTest()
+        {
+            using Repository repo = new Repository("../../../../");
+
+            VersionGenerator versionGenerator = new VersionGenerator("Test1.version.json");
+
+            Assert.Equal(repo.Head.Tip.Sha.Substring(0, 7), versionGenerator.CommitHash);
         }
     }
 }
