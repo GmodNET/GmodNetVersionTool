@@ -118,7 +118,7 @@ namespace GmodNET.VersionTool.Core.Tests
 
             string expected_string = "3.0.2-alpha.1." + time.Year + "." + time.Month + "." + time.Day + "."
                 + time.Hour + "." + time.Minute + "." + time.Second + "." + head_name_normalized
-                + "+codename.Test3.head." + head_name_normalized + ".commit." + repo.Head.Tip.Sha.Substring(0, 7);
+                + "+codename.Test3.head." + head_name_normalized + ".commit." + repo.Head.Tip.Sha.Substring(0, 7) + ".bugfix";
 
             Assert.Equal(expected_string, versionGenerator.FullVersion);
         }
