@@ -91,5 +91,18 @@ namespace GmodNET.VersionTool.Core.Tests
 
             Assert.Equal(expected_version, versionGenerator.FullVersion);
         }
+
+        [Fact]
+        public void Test6()
+        {
+            VersionGenerator versionGenerator = new VersionGenerator("Test2.version.json");
+
+            using Repository repo = new Repository("../../../../");
+
+            string expected_version = "2.2.2+head." + new Regex(@"[^0-9A-Za-z-]+", RegexOptions.ECMAScript).Replace(repo.Head.FriendlyName, "-")
+                + ".commit." + repo.Head.Tip.Sha.Substring(0, 7);
+
+            Assert.Equal(expected_version, versionGenerator.FullVersion);
+        }
     }
 }
