@@ -69,7 +69,7 @@ namespace GmodNET.VersionTool.Core.Tests
         }
 
         [Fact]
-        public void SemVerCompatibility()
+        public void SemVerCompatibilityTest()
         {
             VersionGenerator a = new VersionGenerator("Test1.version.json");
             VersionGenerator b = new VersionGenerator("Test2.version.json");
