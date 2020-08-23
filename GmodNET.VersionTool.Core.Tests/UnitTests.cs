@@ -78,5 +78,18 @@ namespace GmodNET.VersionTool.Core.Tests
             Assert.True(SemVersion.TryParse(a.FullVersion, out _, true) && SemVersion.TryParse(b.FullVersion, out _, true) 
                 && SemVersion.TryParse(c.FullVersion, out _, true));
         }
+
+        [Fact]
+        public void Test5()
+        {
+            VersionGenerator versionGenerator = new VersionGenerator("Test1.version.json");
+
+            using Repository repo = new Repository("../../../../");
+
+            string expected_version = "1.1.1+codename.Test1.head." + new Regex(@"[^0-9A-Za-z-]+", RegexOptions.ECMAScript).Replace(repo.Head.FriendlyName, "-")
+                + ".commit." + repo.Head.Tip.Sha.Substring(0, 7);
+
+            Assert.Equal(expected_version, versionGenerator.FullVersion);
+        }
     }
 }
