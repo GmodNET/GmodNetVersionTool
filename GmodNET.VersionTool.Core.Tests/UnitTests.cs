@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using LibGit2Sharp;
 using LibGit2Sharp.Handlers;
+using Semver;
 
 namespace GmodNET.VersionTool.Core.Tests
 {
@@ -65,6 +66,16 @@ namespace GmodNET.VersionTool.Core.Tests
             VersionGenerator versionGenerator = new VersionGenerator("Test1.version.json");
 
             Assert.Equal(repo.Head.FriendlyName, versionGenerator.BranchName);
+        }
+
+        [Fact]
+        public void SemVerCompatibility()
+        {
+            VersionGenerator a = new VersionGenerator("Test1.version.json");
+            VersionGenerator b = new VersionGenerator("Test2.version.json");
+            VersionGenerator c = new VersionGenerator("Test3.version.json");
+
+            Assert.True(SemVersion.TryParse(a.FullVersion, out _, true) && SemVersion.TryParse(b.FullVersion, out _, true) && SemVersion.TryParse(c.FullVersion, out _, true));
         }
     }
 }

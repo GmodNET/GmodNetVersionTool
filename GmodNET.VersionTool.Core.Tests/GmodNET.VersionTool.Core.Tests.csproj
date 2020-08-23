@@ -19,6 +19,7 @@
     </PackageReference>
     <ProjectReference Include="..\GmodNET.VersionTool.Core\GmodNET.VersionTool.Core.csproj" />
     <PackageReference Include="LibGit2Sharp" Version="0.26.2" />
+	<PackageReference Include="semver" Version="2.0.6" />
   </ItemGroup>
 
   <ItemGroup>
