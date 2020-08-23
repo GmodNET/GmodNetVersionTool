@@ -104,5 +104,23 @@ namespace GmodNET.VersionTool.Core.Tests
 
             Assert.Equal(expected_version, versionGenerator.FullVersion);
         }
+
+        [Fact]
+        public void Test7()
+        {
+            VersionGenerator versionGenerator = new VersionGenerator("Test3.version.json");
+
+            using Repository repo = new Repository("../../../../");
+
+            DateTime time = repo.Head.Tip.Committer.When.UtcDateTime;
+
+            string head_name_normalized = new Regex(@"[^0-9A-Za-z-]+", RegexOptions.ECMAScript).Replace(repo.Head.FriendlyName, "-");
+
+            string expected_string = "3.0.2-alpha.1." + time.Year + "." + time.Month + "." + time.Day + "."
+                + time.Hour + "." + time.Minute + "." + time.Second + "." + head_name_normalized
+                + "+codename.Test3.head." + head_name_normalized + ".commit." + repo.Head.Tip.Sha.Substring(0, 7);
+
+            Assert.Equal(expected_string, versionGenerator.FullVersion);
+        }
     }
 }
