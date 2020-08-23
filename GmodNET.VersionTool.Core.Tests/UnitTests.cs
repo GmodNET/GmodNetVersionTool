@@ -3,6 +3,7 @@ using System;
 using Xunit;
 using GmodNET.VersionTool.Core;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace GmodNET.VersionTool.Core.Tests
 {
@@ -31,7 +32,17 @@ namespace GmodNET.VersionTool.Core.Tests
 
             Regex codename_checker = new Regex(@"\+codename\.Test1", RegexOptions.ECMAScript);
 
-            Assert.True(codename_checker.IsMatch(version_generator.FullVersion));
+            Assert.Matches(codename_checker, version_generator.FullVersion);
+        }
+
+        [Fact]
+        public void Test4()
+        {
+            VersionGenerator versionGenerator = new VersionGenerator("Test2.version.json");
+
+            Regex codename_checker = new Regex(@"codename", RegexOptions.ECMAScript);
+
+            Assert.DoesNotMatch(codename_checker, versionGenerator.FullVersion);
         }
     }
 }
