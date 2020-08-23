@@ -2,6 +2,7 @@ using NuGet.Frameworks;
 using System;
 using Xunit;
 using GmodNET.VersionTool.Core;
+using System.Text.RegularExpressions;
 
 namespace GmodNET.VersionTool.Core.Tests
 {
@@ -21,6 +22,16 @@ namespace GmodNET.VersionTool.Core.Tests
             VersionGenerator version_generator = new VersionGenerator("Test2.version.json");
 
             Assert.Equal("2.2.2", version_generator.FullVersion.Split('+')[0]);
+        }
+
+        [Fact]
+        public void Test3()
+        {
+            VersionGenerator version_generator = new VersionGenerator("Test1.version.json");
+
+            Regex codename_checker = new Regex(@"\+codename\.Test1", RegexOptions.ECMAScript);
+
+            Assert.True(codename_checker.IsMatch(version_generator.FullVersion));
         }
     }
 }
