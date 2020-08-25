@@ -138,5 +138,22 @@ namespace GmodNET.VersionTool.Core.Tests
 
             Assert.Equal("2.2.2", versionGenerator.VersionWithoutBuildData);
         }
+
+        [Fact]
+        public void Test10()
+        {
+            VersionGenerator versionGenerator = new VersionGenerator("Test3.version.json");
+
+            using Repository repo = new Repository("../../../../");
+
+            DateTime time = repo.Head.Tip.Committer.When.UtcDateTime;
+
+            string normalized_head_name = new Regex(@"[^0-9A-Za-z-]+", RegexOptions.ECMAScript).Replace(repo.Head.FriendlyName, "-");
+
+            string expected_version = "3.0.2-alpha.1." + time.Year + "." + time.Month + "." + time.Day + "."
+                + time.Hour + "." + time.Minute + "." + time.Second + "." + normalized_head_name;
+
+            Assert.Equal(expected_version, versionGenerator.VersionWithoutBuildData);
+        }
     }
 }
