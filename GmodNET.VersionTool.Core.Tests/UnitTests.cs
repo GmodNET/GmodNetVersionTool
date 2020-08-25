@@ -155,5 +155,11 @@ namespace GmodNET.VersionTool.Core.Tests
 
             Assert.Equal(expected_version, versionGenerator.VersionWithoutBuildData);
         }
+
+        [Fact]
+        public void ThrowOnNoFileTest()
+        {
+            Assert.ThrowsAny<Exception>(() => { new VersionGenerator("NonExistingFile.v"); });
+        }
     }
 }
