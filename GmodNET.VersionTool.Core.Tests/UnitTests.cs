@@ -161,5 +161,11 @@ namespace GmodNET.VersionTool.Core.Tests
         {
             Assert.ThrowsAny<Exception>(() => { new VersionGenerator("NonExistingFile.v"); });
         }
+
+        [Fact]
+        public void IncorrectFileTest()
+        {
+            Assert.Throws<ArgumentException>(() => { new VersionGenerator("Test4.version.json"); });
+        }
     }
 }
