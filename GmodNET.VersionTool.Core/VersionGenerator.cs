@@ -102,6 +102,8 @@ namespace GmodNET.VersionTool.Core
                     version_string_builder.Append(normalized_head_name);
                 }
 
+                version_without_build_data = version_string_builder.ToString();
+
                 version_string_builder.Append('+');
 
                 Regex codename_regex = new Regex(@"^[0-9A-Za-z-]+$", RegexOptions.ECMAScript | RegexOptions.Compiled);
