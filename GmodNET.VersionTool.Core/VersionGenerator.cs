@@ -13,12 +13,18 @@ namespace GmodNET.VersionTool.Core
     public class VersionGenerator
     {
         readonly string full_version;
+        readonly string version_without_build_data;
         readonly string branch_name;
         readonly string commit_hash;
 
         public string FullVersion
         {
             get {return full_version;}
+        }
+
+        public string VersionWithoutBuildData
+        {
+            get { return version_without_build_data; }
         }
 
         public string BranchName
