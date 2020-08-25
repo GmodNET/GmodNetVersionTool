@@ -10,6 +10,9 @@ using System.Text.RegularExpressions;
 
 namespace GmodNET.VersionTool.Core
 {
+    /// <summary>
+    /// Represents a version generator.
+    /// </summary>
     public class VersionGenerator
     {
         readonly string full_version;
@@ -17,26 +20,45 @@ namespace GmodNET.VersionTool.Core
         readonly string branch_name;
         readonly string commit_hash;
 
+        /// <summary>
+        /// Returns a full generated version with build metadata.
+        /// </summary>
         public string FullVersion
         {
             get {return full_version;}
         }
 
+        /// <summary>
+        /// Returnes a generated version.
+        /// <remarks>
+        /// Unlike <see cref="FullVersion" /> returned string does not contain build metadata.
+        /// </remarks>
+        /// </summary>
         public string VersionWithoutBuildData
         {
             get { return version_without_build_data; }
         }
 
+        /// <summary>
+        /// Returnes the current git repositiry HEAD branch name in human-readable format.
+        /// </summary>
         public string BranchName
         {
             get {return branch_name;}
         }
 
+        /// <summary>
+        /// Returnes first 7 symbols of the current git commit hash.
+        /// </summary>
         public string CommitHash
         {
             get {return commit_hash;}
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VersionGenerator"/> class.
+        /// </summary>
+        /// <param name="path_to_version_file">A full or relative path to a JSON version file.</param>
         public VersionGenerator(string path_to_version_file)
         {
             string full_version_file_path = Path.GetFullPath(path_to_version_file);
