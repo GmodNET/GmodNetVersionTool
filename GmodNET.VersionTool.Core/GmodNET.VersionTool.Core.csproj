@@ -7,7 +7,6 @@
     <PackageIcon>icon.png</PackageIcon>
     <Product>GmodNET.VersionTool.Core class library</Product>
     <Description>Core class library for GmodNET.VersionTool designed to be used in self-titled CLI tool or other apps/libs.</Description>
-    <Authors>GlebKrasilich; GmodNET</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>build-tool; versioning</PackageTags>
     <RepositoryUrl>https://github.com/GmodNET/GmodNetVersionTool</RepositoryUrl>
