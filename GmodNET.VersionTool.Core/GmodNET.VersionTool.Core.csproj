@@ -15,7 +15,7 @@
     <Copyright>Copyright (c) 2020 GmodNET</Copyright>
   </PropertyGroup>
     
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup>
     <DocumentationFile>C:\Users\glebc\OneDrive\Code\GmodNetVersionTool\GmodNET.VersionTool.Core\GmodNET.VersionTool.Core.xml</DocumentationFile>
   </PropertyGroup>
   
