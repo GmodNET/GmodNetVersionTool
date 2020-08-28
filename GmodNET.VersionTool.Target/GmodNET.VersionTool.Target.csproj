@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="../version.props"/>
+	
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+	<CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
+	<SkipCompilerExecution>true</SkipCompilerExecution>
+	<IncludeBuildOutput>false</IncludeBuildOutput>
+  </PropertyGroup>
+
+	<PropertyGroup>
+		<MinClientVersion>4.0</MinClientVersion>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="GmodNET.VersionTool.Task.targets" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="GmodNET.VersionTool.Task.targets" PackagePath="buildMultiTargeting/" />
+	<Content Include="GmodNET.VersionTool.Task.targets" PackagePath="build/" />
+  </ItemGroup>
+
+</Project>
