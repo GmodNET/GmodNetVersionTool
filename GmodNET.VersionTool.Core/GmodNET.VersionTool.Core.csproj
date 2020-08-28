@@ -4,6 +4,7 @@
     
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+	<VersionFilePath>../version.json</VersionFilePath>
     <PackageIcon>icon.png</PackageIcon>
     <Product>GmodNET.VersionTool.Core class library</Product>
     <Description>Core class library for GmodNET.VersionTool designed to be used in self-titled CLI tool or other apps/libs.</Description>
@@ -22,6 +23,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="semver" Version="2.0.6" />
     <PackageReference Include="LibGit2Sharp" Version="0.26.2" />
+	<PackageReference Include="GmodNET.VersionTool.Target" Version="0.1.0-alpha.7" />
   </ItemGroup>
   
   <ItemGroup>
