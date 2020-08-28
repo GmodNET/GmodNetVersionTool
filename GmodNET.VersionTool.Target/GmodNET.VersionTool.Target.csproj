@@ -22,12 +22,12 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <None Remove="versiontool.targets" />
+    <None Remove="GmodNET.VersionTool.Target.targets" />
     <None Remove="_._" />
   </ItemGroup>
 
   <ItemGroup>
-	<Content Include="versiontool.targets" PackagePath="build/" />
+	<Content Include="GmodNET.VersionTool.Target.targets" PackagePath="build/" />
 	<Content Include="../icon.png" PackagePath="/" />
 	<Content Include="_._" PackagePath="lib/netstandard1.0/" />
   </ItemGroup>
