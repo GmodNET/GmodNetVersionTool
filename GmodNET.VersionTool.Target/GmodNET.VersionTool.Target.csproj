@@ -10,8 +10,6 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-		<DevelopmentDependency>true</DevelopmentDependency>
-		<MinClientVersion>4.0</MinClientVersion>
 		<PackageIcon>icon.png</PackageIcon>
 		<Description>
 			GmodNET.VersionTool MSBuild targets.
@@ -28,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="GmodNET.VersionTool.Task.targets" PackagePath="buildMultiTargeting/" />
 	<Content Include="GmodNET.VersionTool.Task.targets" PackagePath="build/" />
 	<Content Include="../icon.png" PackagePath="/" />
   </ItemGroup>
