@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<Import Project="../version.props"/>
+	<Import Project="../version.props" />
 	
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
@@ -23,11 +23,13 @@
 
   <ItemGroup>
     <None Remove="GmodNET.VersionTool.Task.targets" />
+    <None Remove="_._" />
   </ItemGroup>
 
   <ItemGroup>
 	<Content Include="GmodNET.VersionTool.Task.targets" PackagePath="build/" />
 	<Content Include="../icon.png" PackagePath="/" />
+	<Content Include="_._" PackagePath="lib/netstandard1.0/"/>
   </ItemGroup>
 
 </Project>
