@@ -9,6 +9,7 @@
 		
 	<PropertyGroup>
 		<PackAsTool>true</PackAsTool>
+		<PackageId>GmodNET.VersionTool</PackageId>
 		<ToolCommandName>gmodnet-vt</ToolCommandName>
 		<AssemblyName>gmodnet-vt</AssemblyName>
 		<Product>GmodNET.VersionTool CLI tool</Product>
