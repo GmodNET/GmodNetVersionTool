@@ -1,15 +1,35 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<Import Project="../version.props"/>
+	<Import Project="../version.props" />
 	
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
+	</PropertyGroup>
+		
+	<PropertyGroup>
+		<PackAsTool>true</PackAsTool>
+		<ToolCommandName>gmodnet-vt</ToolCommandName>
+		<AssemblyName>gmodnet-vt</AssemblyName>
+		<Product>GmodNET.VersionTool CLI tool</Product>
+		<Description>
+			GmodNET.VersionTool command-line tool. Run as `dotnet tool run gmodnet-vt`.
+		</Description>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageTags>build-tool; versioning</PackageTags>
+		<RepositoryUrl>https://github.com/GmodNET/GmodNetVersionTool</RepositoryUrl>
+		<Company>GmodNET</Company>
+		<Copyright>Copyright (c) 2020 GmodNET</Copyright>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="../GmodNET.VersionTool.Core/GmodNET.VersionTool.Core.csproj" />
 		<PackageReference Include="System.CommandLine" Version="2.0.0-beta1.20371.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="../icon.png" PackagePath="/" />
 	</ItemGroup>
 
 </Project>
