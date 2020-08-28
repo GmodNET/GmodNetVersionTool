@@ -10,7 +10,6 @@
 	<PropertyGroup>
 		<PackAsTool>true</PackAsTool>
 		<ToolCommandName>gmodnet-vt</ToolCommandName>
-		<AssemblyName>gmodnet-vt</AssemblyName>
 		<Product>GmodNET.VersionTool CLI tool</Product>
 		<Description>
 			GmodNET.VersionTool command-line tool. Run as `dotnet tool run gmodnet-vt`.
