@@ -1,13 +1,13 @@
 ﻿<Project>
 	
 	<Target Name="GmodNETVersionToolTarget" BeforeTargets="BeforeBuild;BeforePublish;Publish;Pack">
+		<Exec Command="dotnet tool restore" />
 		<Exec Command="dotnet tool run gmodnet-vt getVersion $(VersionFilePath)" ConsoleToMsBuild="true">
 			<Output TaskParameter="ConsoleOutput" PropertyName="Version" />
 		</Exec>
 		<Exec Command="dotnet tool run gmodnet-vt getVersion $(VersionFilePath)" ConsoleToMsBuild="true">
 			<Output TaskParameter="ConsoleOutput" PropertyName="VersionNoBuildData" />
 		</Exec>
-		<Message Text="GmodNET.VersionTool.Target version: $(Version)" Importance="high" />
 	</Target>
 	
 </Project>
