@@ -3,9 +3,9 @@
 	<Import Project="../GmodNET.VersionTool.Target/GmodNET.VersionTool.Target.targets" />
 
 	<PropertyGroup>
+		<VersionFilePath>../version.json</VersionFilePath>
 		<OutputType>Exe</OutputType>
 		<TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
-		<VersionFilePath>../version.json</VersionFilePath>
 	</PropertyGroup>
 		
 	<PropertyGroup>
