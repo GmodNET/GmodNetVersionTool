@@ -23,3 +23,9 @@ jobs:
 
     - name: Create NuGet packages
       run: dotnet pack -c Release -o nupkgs/
+
+    - name: Upload NuGet packages as artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: nugets
+        path: nupkgs/       
