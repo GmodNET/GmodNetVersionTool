@@ -4,7 +4,7 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFrameworks>net5.0</TargetFrameworks>
+		<TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
 		<VersionFilePath>../version.json</VersionFilePath>
 	</PropertyGroup>
 		
