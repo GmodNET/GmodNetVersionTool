@@ -7,7 +7,7 @@
 	<CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
 	<SkipCompilerExecution>true</SkipCompilerExecution>
 	<IncludeBuildOutput>false</IncludeBuildOutput>
-	<VersionFilePath>../version.json</VersionFilePath>
+		<VersionFilePath>../version.json</VersionFilePath>
   </PropertyGroup>
 
 	<PropertyGroup>
