@@ -1,6 +1,6 @@
 ﻿<Project>
 	
-	<Target Name="GmodNETVersionToolTarget" BeforeTargets="BeforeBuild;BeforePublish;Publish;Pack">
+	<Target Name="GmodNETVersionToolTarget" BeforeTargets="BeforeBuild;BeforePublish;GenerateNuspec">
 		<Exec Command="dotnet tool restore" />
 		<Exec Command="dotnet tool run gmodnet-vt getVersion $(VersionFilePath)" ConsoleToMsBuild="true">
 			<Output TaskParameter="ConsoleOutput" PropertyName="Version" />
