@@ -5,8 +5,8 @@
 		<Exec Command="dotnet tool run gmodnet-vt getVersion $(VersionFilePath)" ConsoleToMsBuild="true">
 			<Output TaskParameter="ConsoleOutput" PropertyName="Version" />
 		</Exec>
-		<Exec Command="dotnet tool run gmodnet-vt getVersion $(VersionFilePath)" ConsoleToMsBuild="true">
-			<Output TaskParameter="ConsoleOutput" PropertyName="VersionNoBuildData" />
+		<Exec Command="dotnet tool run gmodnet-vt getVersion $(VersionFilePath) --skip-build-data" ConsoleToMsBuild="true">
+			<Output TaskParameter="ConsoleOutput" PropertyName="PackageVersion" />
 		</Exec>
 	</Target>
 	
