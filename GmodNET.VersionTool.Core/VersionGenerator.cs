@@ -106,19 +106,13 @@ namespace GmodNET.VersionTool.Core
                     version_string_builder.Append(version_from_file.Prerelease);
 
                     DateTime commit_time = repo.Head.Tip.Committer.When.UtcDateTime;
+                    DateTimeOffset commit_time_offset = new DateTimeOffset(commit_time);
+
+                    // The numerical constant here is UNIX time of January 1st, 2020 12:00 AM UTC
+                    long commit_time_in_seconds = commit_time_offset.ToUnixTimeSeconds() - 1577836800;
 
                     version_string_builder.Append('.');
-                    version_string_builder.Append(commit_time.Year);
-                    version_string_builder.Append('.');
-                    version_string_builder.Append(commit_time.Month);
-                    version_string_builder.Append('.');
-                    version_string_builder.Append(commit_time.Day);
-                    version_string_builder.Append('.');
-                    version_string_builder.Append(commit_time.Hour);
-                    version_string_builder.Append('.');
-                    version_string_builder.Append(commit_time.Minute);
-                    version_string_builder.Append('.');
-                    version_string_builder.Append(commit_time.Second);
+                    version_string_builder.Append(commit_time_in_seconds);
 
                     version_string_builder.Append('.');
                     version_string_builder.Append(normalized_head_name);
