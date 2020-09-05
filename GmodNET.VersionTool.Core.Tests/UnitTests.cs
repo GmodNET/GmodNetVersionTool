@@ -117,7 +117,7 @@ namespace GmodNET.VersionTool.Core.Tests
             string head_name_normalized = new Regex(@"[^0-9A-Za-z-]+", RegexOptions.ECMAScript).Replace(repo.Head.FriendlyName, "-");
 
             string expected_string = "3.0.2-alpha.1." 
-                + (new DateTimeOffset(time).ToUnixTimeSeconds() - new DateTimeOffset(new DateTime(1970, 1, 1), TimeSpan.Zero).ToUnixTimeSeconds()) 
+                + (new DateTimeOffset(time).ToUnixTimeSeconds() - new DateTimeOffset(new DateTime(2020, 1, 1), TimeSpan.Zero).ToUnixTimeSeconds()) 
                 + "." + head_name_normalized
                 + "+codename.Test3.head." + head_name_normalized + ".commit." + repo.Head.Tip.Sha.Substring(0, 7) + ".bugfix";
 
@@ -152,7 +152,7 @@ namespace GmodNET.VersionTool.Core.Tests
             string normalized_head_name = new Regex(@"[^0-9A-Za-z-]+", RegexOptions.ECMAScript).Replace(repo.Head.FriendlyName, "-");
 
             string expected_version = "3.0.2-alpha.1." 
-                + (new DateTimeOffset(time).ToUnixTimeSeconds() - new DateTimeOffset(new DateTime(1970, 1, 1), TimeSpan.Zero).ToUnixTimeSeconds())
+                + (new DateTimeOffset(time).ToUnixTimeSeconds() - new DateTimeOffset(new DateTime(2020, 1, 1), TimeSpan.Zero).ToUnixTimeSeconds())
                 + "." + normalized_head_name;
 
             Assert.Equal(expected_version, versionGenerator.VersionWithoutBuildData);
