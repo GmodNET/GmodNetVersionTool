@@ -36,4 +36,4 @@ jobs:
            dotnet nuget update source gmodnet-packages --username CI --password ${{ secrets.DEVOPS_TOKEN }} --store-password-in-clear-text
            dotnet nuget push nupkgs/GmodNET.VersionTool.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
            dotnet nuget push nupkgs/GmodNET.VersionTool.Core.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
-           dotnet nuget push nupkgsGmodNET.VersionTool.Target.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
+           dotnet nuget push nupkgs/GmodNET.VersionTool.Target.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
