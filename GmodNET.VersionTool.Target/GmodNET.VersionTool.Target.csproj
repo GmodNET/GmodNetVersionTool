@@ -20,6 +20,7 @@
 		<RepositoryUrl>https://github.com/GmodNET/GmodNetVersionTool</RepositoryUrl>
 		<Company>GmodNET</Company>
 		<Copyright>Copyright (c) 2020 GmodNET</Copyright>
+		<DevelopmentDependency>true</DevelopmentDependency>
 	</PropertyGroup>
 
   <ItemGroup>
