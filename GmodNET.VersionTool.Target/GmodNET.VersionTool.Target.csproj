@@ -32,7 +32,7 @@
 		<Content Include="GmodNET.VersionTool.Target.targets" PackagePath="build/" />
 		<Content Include="GmodNET.VersionTool.Target.targets" PackagePath="buildCrossTargeting/" />
 		<Content Include="../icon.png" PackagePath="/" />
-		<Content Include="_._" PackagePath="lib/netstandard1.0/" />
+		<Content Include="_._" PackagePath="lib/netstandard1.1/" />
   </ItemGroup>
 
 </Project>
