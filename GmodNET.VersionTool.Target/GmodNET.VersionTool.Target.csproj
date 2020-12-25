@@ -3,11 +3,11 @@
 	<Import Project="GmodNET.VersionTool.Target.targets"/>
 	
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
-	<CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
-	<SkipCompilerExecution>true</SkipCompilerExecution>
-	<IncludeBuildOutput>false</IncludeBuildOutput>
-	<VersionFilePath>../version.json</VersionFilePath>
+    <TargetFramework>netstandard1.1</TargetFramework>
+		<CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
+		<SkipCompilerExecution>true</SkipCompilerExecution>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<VersionFilePath>../version.json</VersionFilePath>
   </PropertyGroup>
 
 	<PropertyGroup>
