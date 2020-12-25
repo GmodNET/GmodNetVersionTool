@@ -3,7 +3,7 @@
 	<Import Project="GmodNET.VersionTool.Target.targets"/>
 	
   <PropertyGroup>
-    <TargetFramework>netstandard1.1</TargetFramework>
+		<TargetFramework>netstandard1.1</TargetFramework>
 		<CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
 		<SkipCompilerExecution>true</SkipCompilerExecution>
 		<IncludeBuildOutput>false</IncludeBuildOutput>
@@ -29,10 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
-	<Content Include="GmodNET.VersionTool.Target.targets" PackagePath="build/" />
-	<Content Include="GmodNET.VersionTool.Target.targets" PackagePath="buildCrossTargeting/" />
-	<Content Include="../icon.png" PackagePath="/" />
-	<Content Include="_._" PackagePath="lib/netstandard1.0/" />
+		<Content Include="GmodNET.VersionTool.Target.targets" PackagePath="build/" />
+		<Content Include="GmodNET.VersionTool.Target.targets" PackagePath="buildCrossTargeting/" />
+		<Content Include="../icon.png" PackagePath="/" />
+		<Content Include="_._" PackagePath="lib/netstandard1.0/" />
   </ItemGroup>
 
 </Project>
