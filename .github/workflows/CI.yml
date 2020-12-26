@@ -1,0 +1,50 @@
+name: CI/CD
+
+on:
+  push:
+  pull_request:
+  release:
+    types: [published]
+
+jobs:
+  build:
+
+    name: Build, test, and deploy
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v1.7.2
+      with:
+        dotnet-version: 5.0.101
+
+    - name: Test
+      run: dotnet test -f net5.0
+
+    - name: Create NuGet packages
+      run: dotnet pack -c Release -o nupkgs/
+
+    - name: Upload NuGet packages as artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: nugets
+        path: nupkgs/
+
+    - name: Push NuGets to DevOps
+      if: github.event_name == 'push'
+      run: |
+           dotnet nuget update source gmodnet-packages --username CI --password ${{ secrets.DEVOPS_TOKEN }} --store-password-in-clear-text
+           dotnet nuget push nupkgs/GmodNET.VersionTool.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
+           dotnet nuget push nupkgs/GmodNET.VersionTool.Core.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
+           dotnet nuget push nupkgs/GmodNET.VersionTool.Target.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
+
+    - name: Push NuGets to NuGet.org
+      if: github.event_name == 'release'
+      run: |
+           dotnet nuget push nupkgs/GmodNET.VersionTool.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_KEY }}
+           dotnet nuget push nupkgs/GmodNET.VersionTool.Core.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_KEY }}
+           dotnet nuget push nupkgs/GmodNET.VersionTool.Target.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_KEY }}

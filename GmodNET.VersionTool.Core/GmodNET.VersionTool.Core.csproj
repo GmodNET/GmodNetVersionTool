@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="../GmodNET.VersionTool.Target/GmodNET.VersionTool.Target.targets" />
+	
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	<VersionFilePath>../version.json</VersionFilePath>
+    <PackageIcon>icon.png</PackageIcon>
+    <Product>GmodNET.VersionTool.Core class library</Product>
+    <Description>Core class library for GmodNET.VersionTool designed to be used in self-titled CLI tool or other apps/libs.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>build-tool; versioning</PackageTags>
+    <RepositoryUrl>https://github.com/GmodNET/GmodNetVersionTool</RepositoryUrl>
+    <Company>GmodNET</Company>
+    <Copyright>Copyright (c) 2020 GmodNET</Copyright>
+  </PropertyGroup>
+    
+  <PropertyGroup>
+    <DocumentationFile>C:\Users\glebc\OneDrive\Code\GmodNetVersionTool\GmodNET.VersionTool.Core\GmodNET.VersionTool.Core.xml</DocumentationFile>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="semver" Version="2.0.6" />
+    <PackageReference Include="LibGit2Sharp" Version="0.26.2" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="../icon.png" PackagePath="/" />
+  </ItemGroup>
+
+</Project>

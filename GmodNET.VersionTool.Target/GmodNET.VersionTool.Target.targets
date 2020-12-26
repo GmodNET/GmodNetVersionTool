@@ -1,0 +1,18 @@
+﻿<Project>
+	
+	<Target Name="GmodNETVersionToolTarget" BeforeTargets="BeforeBuild;BeforePublish;GenerateNuspec" Condition="'$(ForceVersion)' == ''">
+		<Exec Command="dotnet tool restore" />
+		<Exec Command="dotnet tool run gmodnet-vt getVersion $(VersionFilePath)" ConsoleToMsBuild="true">
+			<Output TaskParameter="ConsoleOutput" PropertyName="Version" />
+		</Exec>
+		<Exec Command="dotnet tool run gmodnet-vt getVersion $(VersionFilePath) --skip-build-data" ConsoleToMsBuild="true">
+			<Output TaskParameter="ConsoleOutput" PropertyName="PackageVersion" />
+		</Exec>
+	</Target>
+
+	<PropertyGroup Condition="'$(ForceVersion)' != ''">
+		<Version>$(ForceVersion)</Version>
+		<PackageVersion>$(ForceVersion)</PackageVersion>
+	</PropertyGroup>
+	
+</Project>
