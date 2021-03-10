@@ -3,7 +3,7 @@
   "isRoot": true,
   "tools": {
     "gmodnet.versiontool": {
-      "version": "1.0.0-preview.1.31145975.master",
+      "version": "1.0.1",
       "commands": [
         "gmodnet-vt"
       ]
