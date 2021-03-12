@@ -3,6 +3,9 @@
   <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)/../Tasks/netcoreapp3.1/GmodNET.VersionTool.MSBuild.dll" TaskName="GmodNET.VersionTool.MSBuild.VersionToolGenerate"
              Condition="'$(MSBuildRuntimeType)' == 'Core'" />
 
+  <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)/../Tasks/net472/GmodNET.VersionTool.MSBuild.dll" TaskName="GmodNET.VersionTool.MSBuild.VersionToolGenerate"
+             Condition="'$(MSBuildRuntimeType)' != 'Core'" />
+
   <Target Name="GmodNETVersionToolTarget" BeforeTargets="BeforeBuild;BeforePublish;GenerateNuspec">
     <VersionToolGenerate VersionFiles="@(VersionFile)">
       <Output TaskParameter="FullVersion" PropertyName="Version" />
