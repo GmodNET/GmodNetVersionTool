@@ -40,6 +40,14 @@ namespace GmodNET.VersionTool.MSBuild
                 Tuple<string, string> ver_pair;
 
 #if NET472_OR_GREATER
+                [DllImport("Krnel32.dll", CharSet = CharSet.Unicode)]
+                static extern bool SetDllDirectoryW(string folder);
+
+                if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    SetDllDirectoryW("brr");
+                }
+
                 ver_pair = new InnerVersionGenerator().Generate(VersionFiles[0]);
 #elif NETCOREAPP3_1_OR_GREATER
                 Assembly innerAssembly = new CustomLoadContext(this, Log).LoadFromAssemblyPath(this.GetType().Assembly.Location);
