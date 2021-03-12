@@ -2,7 +2,12 @@
 using Microsoft.Build.Framework;
 using GmodNET.VersionTool.Core;
 using System.Runtime.InteropServices;
+using System.Reflection;
 using System.IO;
+using System.Linq;
+#if NETCOREAPP3_1_OR_GREATER
+using System.Runtime.Loader;
+#endif
 
 namespace GmodNET.VersionTool.MSBuild
 {
@@ -23,66 +28,95 @@ namespace GmodNET.VersionTool.MSBuild
             {
                 if(VersionFiles.Length == 0)
                 {
-                    Log.LogError("Version file is not specified.");
+                    Log.LogError("(GmodNET.VersionTool.MSBuild) Version file is not specified.");
                     return false;
                 }
                 else if (VersionFiles.Length > 1)
                 {
-                    Log.LogError("There is more than one version file for the project.");
+                    Log.LogError("(GmodNET.VersionTool.MSBuild) There is more than one version file for the project.");
                     return false;
                 }
 
-                string[] platforms = new string[]
-                {
-                    "win-x86",
-                    "win-x64",
-                    "osx",
-                    "linux-arm",
-                    "linux-arm64",
-                    "linux-musl-x64",
-                    "linux-x64"
-                };
+                Tuple<string, string> ver_pair;
 
-                string path_var = Environment.GetEnvironmentVariable("PATH");
+#if NET472_OR_GREATER
+                ver_pair = new InnerVersionGenerator().Generate(VersionFiles[0]);
+#elif NETCOREAPP3_1_OR_GREATER
+                Assembly innerAssembly = new CustomLoadContext(this, Log).LoadFromAssemblyPath(this.GetType().Assembly.Location);
 
-                path_var += Path.PathSeparator + Path.Combine(Path.GetDirectoryName(typeof(VersionToolGenerate).Assembly.Location), $"runtimes\\win-x64\\native");
+                dynamic inner_generator = Activator.CreateInstance(innerAssembly.GetTypes().First(type => type.FullName == typeof(InnerVersionGenerator).FullName));
 
-                Environment.SetEnvironmentVariable("PATH", path_var);
+                ver_pair = inner_generator.Generate(VersionFiles[0]);
+#endif
 
-                Log.LogWarning($"Resulting 11 PATH: ${Environment.GetEnvironmentVariable("PATH")}");
-
-                VersionGenerator generator = new VersionGenerator(VersionFiles[0]);
-
-                FullVersion = generator.FullVersion;
-                ShortVersion = generator.VersionWithoutBuildData;
+                FullVersion = ver_pair.Item1;
+                ShortVersion = ver_pair.Item2;
 
                 return true;    
             }
             catch(Exception e)
             {
-                Log.LogError("Exception was thrown while executing VersionToolGenerate task (GmodNET.VersionTool.MSBuild): " + e.ToString());
+                Log.LogError("(GmodNET.VersionTool.MSBuild) Exception was thrown while executing VersionToolGenerate task: " + e.ToString());
                 return false;
             }
         }
 
-        static OSPlatform GetOSPlatform()
+#if NETCOREAPP3_1_OR_GREATER
+        class CustomLoadContext : AssemblyLoadContext
         {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            VersionToolGenerate generator;
+            AssemblyDependencyResolver resolver;
+            Microsoft.Build.Utilities.TaskLoggingHelper logger;
+
+            public CustomLoadContext(VersionToolGenerate generator, Microsoft.Build.Utilities.TaskLoggingHelper logger) : base()
             {
-                return OSPlatform.Windows;
+                this.generator = generator;
+                resolver = new AssemblyDependencyResolver(generator.GetType().Assembly.Location);
+                this.logger = logger;
             }
-            else if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+
+            protected override Assembly Load(AssemblyName assemblyName)
             {
-                return OSPlatform.Linux;
+                string assembly_path = resolver.ResolveAssemblyToPath(assemblyName);
+
+                try
+                {
+                    return this.LoadFromAssemblyPath(assembly_path);
+                }
+                catch
+                {
+                    return null;
+                }
             }
-            else if(RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+
+            protected override IntPtr LoadUnmanagedDll(string unmanagedDllName)
             {
-                return OSPlatform.OSX;
+                logger.LogWarning($"Resolving native library {unmanagedDllName}");
+
+                string lib_path = resolver.ResolveUnmanagedDllToPath(unmanagedDllName);
+
+                logger.LogWarning($"Resolved library path is {lib_path}");
+
+                try
+                {
+                    return NativeLibrary.Load(lib_path);
+                }
+                catch
+                {
+                    return IntPtr.Zero;
+                }
             }
-            else
-            {
-                return OSPlatform.Create("UNKNOWN");
-            }
+        }
+#endif
+    }
+
+    public class InnerVersionGenerator
+    {
+        public Tuple<string, string> Generate(string version_file_path)
+        {
+            VersionGenerator gen = new VersionGenerator(version_file_path);
+
+            return new Tuple<string, string>(gen.FullVersion, gen.VersionWithoutBuildData);
         }
     }
 }

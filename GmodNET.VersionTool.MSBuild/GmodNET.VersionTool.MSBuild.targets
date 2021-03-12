@@ -1,6 +1,6 @@
 <Project>
 
-  <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)/../Tasks/GmodNET.VersionTool.MSBuild.dll" TaskName="GmodNET.VersionTool.MSBuild.VersionToolGenerate" />
+  <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)/../Tasks/netcoreapp3.1/GmodNET.VersionTool.MSBuild.dll" TaskName="GmodNET.VersionTool.MSBuild.VersionToolGenerate" />
 
   <Target Name="GmodNETVersionToolTarget" BeforeTargets="BeforeBuild;BeforePublish;GenerateNuspec">
     <VersionToolGenerate VersionFiles="@(VersionFile)">

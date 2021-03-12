@@ -3,7 +3,7 @@
   <Import Project="../GmodNET.VersionTool.Target/GmodNET.VersionTool.Target.targets" />
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
     <VersionFilePath>../version.json</VersionFilePath>
     <DevelopmentDependency>true</DevelopmentDependency>
     <PackageIcon>icon.png</PackageIcon>
@@ -27,7 +27,7 @@
     <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.3.0">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="LibGit2Sharp.NativeBinaries" Version="2.0.312" GeneratePathProperty="true">
+    <PackageReference Include="LibGit2Sharp.NativeBinaries" Version="[2.0.312]" GeneratePathProperty="true">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
@@ -36,17 +36,20 @@
     <Content Include="GmodNET.VersionTool.MSBuild.targets" PackagePath="buildMultiTargeting/" />
     <Content Include="GmodNET.VersionTool.MSBuild.targets" PackagePath="build/" />
     <Content Include="../icon.png" PackagePath="/" />
-    <Content Include="$(PkgLibGit2Sharp_NativeBinaries)/runtimes/**/*.*" PackagePath="Tasks/runtimes/" />
   </ItemGroup>
 
   <Target Name="PackTaskDependencies" BeforeTargets="GenerateNuspec">
     <ItemGroup>
-      <_PackageFiles Include="bin/$(Configuration)/$(TargetFramework)/*.*">
-        <PackagePath>Tasks/</PackagePath>
+      <_PackageFiles Include="bin/$(Configuration)/net472/*.*">
+        <PackagePath>Tasks/net472/</PackagePath>
+      </_PackageFiles>
+      <_PackageFiles Include="bin/$(Configuration)/netcoreapp3.1/*.*">
+        <PackagePath>Tasks/netcoreapp3.1/</PackagePath>
+      </_PackageFiles>
+      <_PackageFiles Include="bin/$(Configuration)/netcoreapp3.1/runtimes/**/*.*">
+        <PackagePath>Tasks/netcoreapp3.1/runtimes/</PackagePath>
       </_PackageFiles>
       <_PackageFiles Remove="**/*.xml" />
-      <_PackageFiles Remove="**/*.pdb" />
-      <_PackageFiles Remove="**/*.deps.json" />
       <_PackageFiles Remove="**/System.*.dll" />
       <_PackageFiles Remove="**/Microsoft.*.dll" />
     </ItemGroup>
