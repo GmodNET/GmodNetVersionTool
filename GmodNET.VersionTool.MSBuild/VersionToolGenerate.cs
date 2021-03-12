@@ -40,12 +40,23 @@ namespace GmodNET.VersionTool.MSBuild
                 Tuple<string, string> ver_pair;
 
 #if NET472_OR_GREATER
-                [DllImport("Krnel32.dll", CharSet = CharSet.Unicode)]
+                [DllImport("Kernel32.dll", CharSet = CharSet.Unicode)]
                 static extern bool SetDllDirectoryW(string folder);
 
                 if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    SetDllDirectoryW("brr");
+                    string assembly_directory = Path.GetDirectoryName(this.GetType().Assembly.Location);
+
+                    if(RuntimeInformation.OSArchitecture == Architecture.X86)
+                    {
+                        Log.LogWarning($"Add path for dlls: ${Path.Combine(assembly_directory, "..", "netcoreapp3.1", "runtimes", "win-x86", "native")}");
+                        SetDllDirectoryW(Path.Combine(assembly_directory, "..", "netcoreapp3.1", "runtimes", "win-x86", "native"));
+                    }
+                    else if(RuntimeInformation.OSArchitecture == Architecture.X64)
+                    {
+                        Log.LogWarning($"Add path for dlls: ${Path.Combine(assembly_directory, "..", "netcoreapp3.1", "runtimes", "win-x64", "native")}");
+                        SetDllDirectoryW(Path.Combine(assembly_directory, "..", "netcoreapp3.1", "runtimes", "win-x64", "native"));
+                    }
                 }
 
                 ver_pair = new InnerVersionGenerator().Generate(VersionFiles[0]);
