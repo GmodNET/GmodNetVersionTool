@@ -91,11 +91,7 @@ namespace GmodNET.VersionTool.MSBuild
 
             protected override IntPtr LoadUnmanagedDll(string unmanagedDllName)
             {
-                logger.LogWarning($"Resolving native library {unmanagedDllName}");
-
                 string lib_path = resolver.ResolveUnmanagedDllToPath(unmanagedDllName);
-
-                logger.LogWarning($"Resolved library path is {lib_path}");
 
                 try
                 {
