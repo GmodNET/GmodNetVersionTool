@@ -7,6 +7,9 @@
       <Output TaskParameter="FullVersion" PropertyName="Version" />
       <Output TaskParameter="ShortVersion" PropertyName="PackageVersion" />
     </VersionToolGenerate>
+
+    <Message Text="(GmodNET.VersionTool.MSBuild) Generated Version: $(Version)" Importance="high" />
+    <Message Text="(GmodNET.VersionTool.MSBuild) Generated Package Version: $(PackageVersion)" Importance="high" />
   </Target>
   
 </Project>
