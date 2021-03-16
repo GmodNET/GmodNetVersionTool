@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Reflection;
 using System.IO;
 using System.Linq;
+using System.Text;
 #if NETCOREAPP3_1
 using System.Runtime.Loader;
 #endif
@@ -43,10 +44,13 @@ namespace GmodNET.VersionTool.MSBuild
                 [DllImport("Kernel32.dll", CharSet = CharSet.Unicode)]
                 static extern bool SetDllDirectoryW(string folder);
 
-                if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    string assembly_directory = new DirectoryInfo(Path.GetDirectoryName(this.GetType().Assembly.Location)).Parent.FullName;
+                [DllImport("__Internal")]
+                static extern unsafe void mono_dllmap_insert(IntPtr assembly, byte* dll, IntPtr func, byte* tdll, IntPtr tfunc);
 
+                string assembly_directory = new DirectoryInfo(Path.GetDirectoryName(this.GetType().Assembly.Location)).Parent.FullName;
+
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                { 
                     if(IntPtr.Size == 4)
                     {
                         Log.LogWarning($"Add path for dlls: {Path.Combine(assembly_directory, "netcoreapp3.1", "runtimes", "win-x86", "native")}");
@@ -56,6 +60,25 @@ namespace GmodNET.VersionTool.MSBuild
                     {
                         Log.LogWarning($"Add path for dlls: {Path.Combine(assembly_directory, "netcoreapp3.1", "runtimes", "win-x64", "native")}");
                         SetDllDirectoryW(Path.Combine(assembly_directory, "netcoreapp3.1", "runtimes", "win-x64", "native"));
+                    }
+                }
+                else if(RuntimeInformation.IsOSPlatform(OSPlatform.OSX) && Type.GetType("Mono.Runtime") != null)
+                {
+                    string git_lib_name = "git2-6777db8";
+                    string git_lib_path = Path.Combine(assembly_directory, "netcoreapp3.1", "runtimes", "osx", "native", "libgit2-6777db8.dylib");
+
+                    byte[] git_lib_name_bytes = Encoding.UTF8.GetBytes(git_lib_name);
+                    byte[] git_lib_path_bytes = Encoding.UTF8.GetBytes(git_lib_path);
+
+                    unsafe
+                    {
+                        fixed(byte* git_lib_name_ptr = &git_lib_name_bytes[0])
+                        {
+                            fixed(byte* git_lib_path_ptr = &git_lib_path_bytes[0])
+                            {
+                                mono_dllmap_insert(IntPtr.Zero, git_lib_name_ptr, IntPtr.Zero, git_lib_path_ptr, IntPtr.Zero);
+                            }
+                        }
                     }
                 }
 
