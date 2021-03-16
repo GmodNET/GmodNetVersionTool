@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Reflection;
 using System.IO;
 using System.Linq;
-#if NETCOREAPP3_1_OR_GREATER
+#if NETCOREAPP3_1
 using System.Runtime.Loader;
 #endif
 
@@ -39,7 +39,7 @@ namespace GmodNET.VersionTool.MSBuild
 
                 Tuple<string, string> ver_pair;
 
-#if NET472_OR_GREATER
+#if NET472
                 [DllImport("Kernel32.dll", CharSet = CharSet.Unicode)]
                 static extern bool SetDllDirectoryW(string folder);
 
@@ -60,7 +60,7 @@ namespace GmodNET.VersionTool.MSBuild
                 }
 
                 ver_pair = new InnerVersionGenerator().Generate(VersionFiles[0]);
-#elif NETCOREAPP3_1_OR_GREATER
+#elif NETCOREAPP3_1
                 Assembly innerAssembly = new CustomLoadContext(this, Log).LoadFromAssemblyPath(this.GetType().Assembly.Location);
 
                 dynamic inner_generator = Activator.CreateInstance(innerAssembly.GetTypes().First(type => type.FullName == typeof(InnerVersionGenerator).FullName));
@@ -80,7 +80,7 @@ namespace GmodNET.VersionTool.MSBuild
             }
         }
 
-#if NETCOREAPP3_1_OR_GREATER
+#if NETCOREAPP3_1
         class CustomLoadContext : AssemblyLoadContext
         {
             VersionToolGenerate generator;
