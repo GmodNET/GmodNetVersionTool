@@ -84,11 +84,15 @@ namespace GmodNET.VersionTool.MSBuild
 
                 ver_pair = new InnerVersionGenerator().Generate(VersionFiles[0]);
 #elif NETCOREAPP3_1
-                Assembly innerAssembly = new CustomLoadContext(this, Log).LoadFromAssemblyPath(this.GetType().Assembly.Location);
+                CustomLoadContext load_context = new CustomLoadContext(this, Log);
+
+                Assembly innerAssembly = load_context.LoadFromAssemblyPath(this.GetType().Assembly.Location);
 
                 dynamic inner_generator = Activator.CreateInstance(innerAssembly.GetTypes().First(type => type.FullName == typeof(InnerVersionGenerator).FullName));
 
                 ver_pair = inner_generator.Generate(VersionFiles[0]);
+
+                load_context.Unload();
 #endif
 
                 FullVersion = ver_pair.Item1;
@@ -110,7 +114,7 @@ namespace GmodNET.VersionTool.MSBuild
             AssemblyDependencyResolver resolver;
             Microsoft.Build.Utilities.TaskLoggingHelper logger;
 
-            public CustomLoadContext(VersionToolGenerate generator, Microsoft.Build.Utilities.TaskLoggingHelper logger) : base()
+            public CustomLoadContext(VersionToolGenerate generator, Microsoft.Build.Utilities.TaskLoggingHelper logger) : base(isCollectible: true)
             {
                 this.generator = generator;
                 resolver = new AssemblyDependencyResolver(generator.GetType().Assembly.Location);
