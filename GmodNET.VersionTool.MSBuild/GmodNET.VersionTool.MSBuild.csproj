@@ -3,7 +3,7 @@
   <Import Project="../GmodNET.VersionTool.Target/GmodNET.VersionTool.Target.targets" />
 
   <PropertyGroup>
-    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net472;netcoreapp3.1;netstandard2.0</TargetFrameworks>
     <VersionFilePath>../version.json</VersionFilePath>
     <DevelopmentDependency>true</DevelopmentDependency>
     <PackageIcon>icon.png</PackageIcon>
@@ -34,6 +34,10 @@
     <Content Include="GmodNET.VersionTool.MSBuild.targets" PackagePath="buildMultiTargeting/" />
     <Content Include="GmodNET.VersionTool.MSBuild.targets" PackagePath="build/" />
     <Content Include="../icon.png" PackagePath="/" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <Compile Remove="*" />
   </ItemGroup>
 
   <Target Name="PackTaskDependencies" BeforeTargets="GenerateNuspec">
