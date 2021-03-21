@@ -21,6 +21,7 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <LangVersion>9.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>NU5100;NU5128</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
