@@ -1,12 +1,29 @@
 <Project>
 
+  <PropertyGroup>
+    <VersionDependsOn>
+      GmodNETVersionToolTarget;
+      $(VersionDependsOn)
+    </VersionDependsOn>
+
+    <GenerateNuspecDependsOn>
+      GmodNETVersionToolTarget;
+      $(GenerateNuspecDependsOn)
+    </GenerateNuspecDependsOn>
+
+    <GetPackageVersionDependsOn>
+      GmodNETVersionToolTarget;
+      $(GetPackageVersionDependsOn)
+    </GetPackageVersionDependsOn>
+  </PropertyGroup>
+
   <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)/../Tasks/netcoreapp3.1/GmodNET.VersionTool.MSBuild.dll" TaskName="GmodNET.VersionTool.MSBuild.VersionToolGenerate"
              Condition="'$(MSBuildRuntimeType)' == 'Core'" />
 
   <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)/../Tasks/net472/GmodNET.VersionTool.MSBuild.dll" TaskName="GmodNET.VersionTool.MSBuild.VersionToolGenerate"
              Condition="'$(MSBuildRuntimeType)' != 'Core'" />
 
-  <Target Name="GmodNETVersionToolTarget" BeforeTargets="BeforeBuild;BeforePublish;GenerateNuspec">
+  <Target Name="GmodNETVersionToolTarget">
     <VersionToolGenerate VersionFiles="@(VersionFile)">
       <Output TaskParameter="FullVersion" PropertyName="Version" />
       <Output TaskParameter="ShortVersion" PropertyName="PackageVersion" />
