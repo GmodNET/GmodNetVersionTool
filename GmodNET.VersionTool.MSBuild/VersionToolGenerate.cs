@@ -53,12 +53,10 @@ namespace GmodNET.VersionTool.MSBuild
                 { 
                     if(IntPtr.Size == 4)
                     {
-                        Log.LogWarning($"Add path for dlls: {Path.Combine(assembly_directory, "netcoreapp3.1", "runtimes", "win-x86", "native")}");
                         SetDllDirectoryW(Path.Combine(assembly_directory, "netcoreapp3.1", "runtimes", "win-x86", "native"));
                     }
                     else if(IntPtr.Size == 8)
                     {
-                        Log.LogWarning($"Add path for dlls: {Path.Combine(assembly_directory, "netcoreapp3.1", "runtimes", "win-x64", "native")}");
                         SetDllDirectoryW(Path.Combine(assembly_directory, "netcoreapp3.1", "runtimes", "win-x64", "native"));
                     }
                 }
