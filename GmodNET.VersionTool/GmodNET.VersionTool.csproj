@@ -5,7 +5,7 @@
 	<PropertyGroup>
 		<VersionFilePath>../version.json</VersionFilePath>
 		<OutputType>Exe</OutputType>
-		<TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
+		<TargetFrameworks>netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
 	</PropertyGroup>
 		
 	<PropertyGroup>
@@ -27,7 +27,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="../GmodNET.VersionTool.Core/GmodNET.VersionTool.Core.csproj" />
-		<PackageReference Include="System.CommandLine" Version="2.0.0-beta1.20371.2" />
+		<PackageReference Include="System.CommandLine" Version="2.0.0-beta1.20574.7" />
 	</ItemGroup>
 
 	<ItemGroup>

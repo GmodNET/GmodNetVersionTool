@@ -4,7 +4,7 @@
 	
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-	<VersionFilePath>../version.json</VersionFilePath>
+    <VersionFilePath>../version.json</VersionFilePath>
     <PackageIcon>icon.png</PackageIcon>
     <Product>GmodNET.VersionTool.Core class library</Product>
     <Description>Core class library for GmodNET.VersionTool designed to be used in self-titled CLI tool or other apps/libs.</Description>

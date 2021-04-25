@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GmodNET.VersionTool", "Gmod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GmodNET.VersionTool.Target", "GmodNET.VersionTool.Target\GmodNET.VersionTool.Target.csproj", "{0C61D8BD-ABC1-4843-812C-4EBC92D30851}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GmodNET.VersionTool.MSBuild", "GmodNET.VersionTool.MSBuild\GmodNET.VersionTool.MSBuild.csproj", "{2815F2AD-6E10-4B8F-9C4E-84D2F34BCA6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{0C61D8BD-ABC1-4843-812C-4EBC92D30851}.Release|x64.Build.0 = Release|Any CPU
 		{0C61D8BD-ABC1-4843-812C-4EBC92D30851}.Release|x86.ActiveCfg = Release|Any CPU
 		{0C61D8BD-ABC1-4843-812C-4EBC92D30851}.Release|x86.Build.0 = Release|Any CPU
+		{2815F2AD-6E10-4B8F-9C4E-84D2F34BCA6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2815F2AD-6E10-4B8F-9C4E-84D2F34BCA6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2815F2AD-6E10-4B8F-9C4E-84D2F34BCA6E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2815F2AD-6E10-4B8F-9C4E-84D2F34BCA6E}.Debug|x64.Build.0 = Debug|Any CPU
+		{2815F2AD-6E10-4B8F-9C4E-84D2F34BCA6E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2815F2AD-6E10-4B8F-9C4E-84D2F34BCA6E}.Debug|x86.Build.0 = Debug|Any CPU
+		{2815F2AD-6E10-4B8F-9C4E-84D2F34BCA6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2815F2AD-6E10-4B8F-9C4E-84D2F34BCA6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2815F2AD-6E10-4B8F-9C4E-84D2F34BCA6E}.Release|x64.ActiveCfg = Release|Any CPU
+		{2815F2AD-6E10-4B8F-9C4E-84D2F34BCA6E}.Release|x64.Build.0 = Release|Any CPU
+		{2815F2AD-6E10-4B8F-9C4E-84D2F34BCA6E}.Release|x86.ActiveCfg = Release|Any CPU
+		{2815F2AD-6E10-4B8F-9C4E-84D2F34BCA6E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
