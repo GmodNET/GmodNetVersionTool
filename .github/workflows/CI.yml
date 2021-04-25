@@ -27,6 +27,11 @@ jobs:
       with:
         dotnet-version: 5.0.201
 
+    - name: Setup .NET 6 SDK
+      uses: actions/setup-dotnet@v1.7.2
+      with:
+        dotnet-version: 6.0.100-preview.3.21202.5
+
     - name: Test
       run: dotnet test
 
@@ -46,6 +51,7 @@ jobs:
            dotnet nuget push nupkgs/GmodNET.VersionTool.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
            dotnet nuget push nupkgs/GmodNET.VersionTool.Core.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
            dotnet nuget push nupkgs/GmodNET.VersionTool.Target.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
+           dotnet nuget push nupkgs/GmodNET.VersionTool.MSBuild.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
 
     - name: Push NuGets to NuGet.org
       if: github.event_name == 'release' && github.event.action == 'published' && github.repository_owner == 'GmodNET'
@@ -53,3 +59,4 @@ jobs:
            dotnet nuget push nupkgs/GmodNET.VersionTool.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_KEY }}
            dotnet nuget push nupkgs/GmodNET.VersionTool.Core.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_KEY }}
            dotnet nuget push nupkgs/GmodNET.VersionTool.Target.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_KEY }}
+           dotnet nuget push nupkgs/GmodNET.VersionTool.MSBuild.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_KEY }}
