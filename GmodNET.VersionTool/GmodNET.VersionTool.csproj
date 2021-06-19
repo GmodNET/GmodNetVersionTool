@@ -22,7 +22,7 @@
 		<PackageTags>build-tool; versioning</PackageTags>
 		<RepositoryUrl>https://github.com/GmodNET/GmodNetVersionTool</RepositoryUrl>
 		<Company>GmodNET</Company>
-		<Copyright>Copyright (c) 2020 GmodNET</Copyright>
+		<Copyright>Copyright (c) 2021 GmodNET</Copyright>
 	</PropertyGroup>
 
 	<ItemGroup>
