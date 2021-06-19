@@ -6,6 +6,7 @@
 		<VersionFilePath>../version.json</VersionFilePath>
 		<OutputType>Exe</OutputType>
 		<TargetFrameworks>netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
+		<RollForward>Major</RollForward>
 	</PropertyGroup>
 		
 	<PropertyGroup>
@@ -22,7 +23,7 @@
 		<PackageTags>build-tool; versioning</PackageTags>
 		<RepositoryUrl>https://github.com/GmodNET/GmodNetVersionTool</RepositoryUrl>
 		<Company>GmodNET</Company>
-		<Copyright>Copyright (c) 2020 GmodNET</Copyright>
+		<Copyright>Copyright (c) 2021 GmodNET</Copyright>
 	</PropertyGroup>
 
 	<ItemGroup>
