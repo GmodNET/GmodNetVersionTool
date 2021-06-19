@@ -20,17 +20,17 @@ jobs:
     - name: Setup .NET Core 3.1 SDK
       uses: actions/setup-dotnet@v1.7.2
       with:
-        dotnet-version: 3.1.408
+        dotnet-version: 3.1.410
 
     - name: Setup .NET 5 SDK
       uses: actions/setup-dotnet@v1.7.2
       with:
-        dotnet-version: 5.0.202
+        dotnet-version: 5.0.301
 
     - name: Setup .NET 6 SDK
       uses: actions/setup-dotnet@v1.7.2
       with:
-        dotnet-version: 6.0.100-preview.3.21202.5
+        dotnet-version: 6.0.100-preview.5.21302.13
 
     - name: Test
       run: dotnet test
