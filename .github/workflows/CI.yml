@@ -47,7 +47,7 @@ jobs:
     - name: Push NuGets to DevOps
       if: github.event_name == 'push' && github.repository_owner == 'GmodNET'
       run: |
-           dotnet nuget update source gmodnet-packages --username CI --password ${{ secrets.DEVOPS_TOKEN }} --store-password-in-clear-text
+           dotnet nuget update source gmodnet-packages --username CI --password ${{ secrets.AZURE_DEVOPS_ARTIFACTS_PAT }} --store-password-in-clear-text
            dotnet nuget push nupkgs/GmodNET.VersionTool.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
            dotnet nuget push nupkgs/GmodNET.VersionTool.Core.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
            dotnet nuget push nupkgs/GmodNET.VersionTool.Target.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
@@ -56,7 +56,7 @@ jobs:
     - name: Push NuGets to NuGet.org
       if: github.event_name == 'release' && github.event.action == 'published' && github.repository_owner == 'GmodNET'
       run: |
-           dotnet nuget push nupkgs/GmodNET.VersionTool.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_KEY }}
-           dotnet nuget push nupkgs/GmodNET.VersionTool.Core.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_KEY }}
-           dotnet nuget push nupkgs/GmodNET.VersionTool.Target.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_KEY }}
-           dotnet nuget push nupkgs/GmodNET.VersionTool.MSBuild.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_KEY }}
+           dotnet nuget push nupkgs/GmodNET.VersionTool.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
+           dotnet nuget push nupkgs/GmodNET.VersionTool.Core.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
+           dotnet nuget push nupkgs/GmodNET.VersionTool.Target.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
+           dotnet nuget push nupkgs/GmodNET.VersionTool.MSBuild.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
