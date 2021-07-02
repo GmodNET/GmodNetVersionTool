@@ -74,6 +74,9 @@
       GmodNETVersionToolTarget;
       $(GetPackageVersionDependsOn)
     </GetPackageVersionDependsOn>
+
+    <!-- Make tool work well with Microsoft SourceLink -->
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
 
   <Target Name="GmodNETVersionToolTarget" BeforeTargets="BeforeBuild">

@@ -10,10 +10,18 @@
     <RepositoryUrl>https://github.com/GmodNET/GmodNetVersionTool</RepositoryUrl>
     <Company>GmodNET</Company>
     <Copyright>Copyright (c) 2021 GmodNET</Copyright>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
     
   <PropertyGroup>
     <DocumentationFile>C:\Users\glebc\OneDrive\Code\GmodNetVersionTool\GmodNET.VersionTool.Core\GmodNET.VersionTool.Core.xml</DocumentationFile>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
   
   <ItemGroup>
@@ -23,6 +31,7 @@
     <PackageReference Include="GmodNET.VersionTool.MSBuild" Version="2.0.0-alpha.1.47401343.main">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
   </ItemGroup>
   
   <ItemGroup>
