@@ -1,9 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<Import Project="../GmodNET.VersionTool.Target/GmodNET.VersionTool.Target.targets" />
-
 	<PropertyGroup>
-		<VersionFilePath>../version.json</VersionFilePath>
 		<OutputType>Exe</OutputType>
 		<TargetFrameworks>netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
 		<RollForward>Major</RollForward>
@@ -29,9 +26,13 @@
 	<ItemGroup>
 		<ProjectReference Include="../GmodNET.VersionTool.Core/GmodNET.VersionTool.Core.csproj" />
 		<PackageReference Include="System.CommandLine" Version="2.0.0-beta1.20574.7" />
+    <PackageReference Include="GmodNET.VersionTool.MSBuild" Version="2.0.0-alpha.1.47401343.main">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>
+    <VersionFile Include="../version.json" />
 		<Content Include="../icon.png" PackagePath="/" />
 	</ItemGroup>
 
