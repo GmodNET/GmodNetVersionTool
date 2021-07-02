@@ -138,7 +138,7 @@ namespace GmodNET.VersionTool.Core
                 version_string_builder.Append("commit");
                 version_string_builder.Append('.');
                 
-                commit_hash = repo.Head.Tip.Sha.Substring(0, 7);
+                commit_hash = repo.Head.Tip.Sha;
 
                 version_string_builder.Append(commit_hash);
 
