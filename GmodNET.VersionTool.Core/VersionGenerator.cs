@@ -83,6 +83,10 @@ namespace GmodNET.VersionTool.Core
             while(!repository_directory.GetDirectories().Where(info => info.Name == ".git").Any())
             {
                 repository_directory = repository_directory.Parent;
+                if (repository_directory == null)
+                {
+                    throw new ArgumentException("Version file is not contained in any git repository");
+                }
             }
 
             using(Repository repo = new Repository(repository_directory.FullName))

@@ -7,6 +7,7 @@ using System.Threading;
 using LibGit2Sharp;
 using LibGit2Sharp.Handlers;
 using Semver;
+using System.IO;
 
 namespace GmodNET.VersionTool.Core.Tests
 {
@@ -168,6 +169,15 @@ namespace GmodNET.VersionTool.Core.Tests
         public void IncorrectFileTest()
         {
             Assert.Throws<ArgumentException>(() => { new VersionGenerator("Test4.version.json"); });
+        }
+
+        [Fact]
+        public void VersionFileIsNotInRepositoryTest()
+        {
+            string temp_version_file_name = Path.GetTempPath() + Guid.NewGuid().ToString() + ".json";
+            File.Copy("Test3.version.json", temp_version_file_name);
+            Assert.Throws<ArgumentException>(() => { new VersionGenerator(temp_version_file_name); });
+            File.Delete(temp_version_file_name);
         }
     }
 }
