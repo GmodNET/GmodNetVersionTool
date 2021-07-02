@@ -4,7 +4,14 @@
 		<OutputType>Exe</OutputType>
 		<TargetFrameworks>netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
 		<RollForward>Major</RollForward>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
 	</PropertyGroup>
+
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
 		
 	<PropertyGroup>
 		<PackAsTool>true</PackAsTool>
@@ -13,7 +20,7 @@
 		<AssemblyName>gmodnet-vt</AssemblyName>
 		<Product>GmodNET.VersionTool CLI tool</Product>
 		<Description>
-			GmodNET.VersionTool command-line tool. Run as `dotnet tool run gmodnet-vt`.
+			GmodNET.VersionTool command-line tool. Run as `dotnet gmodnet-vt`.
 		</Description>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -29,6 +36,7 @@
     <PackageReference Include="GmodNET.VersionTool.MSBuild" Version="2.0.0-alpha.1.47401343.main">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
 	</ItemGroup>
 
 	<ItemGroup>
