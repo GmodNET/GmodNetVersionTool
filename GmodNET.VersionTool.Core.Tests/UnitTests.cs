@@ -55,7 +55,7 @@ namespace GmodNET.VersionTool.Core.Tests
 
             VersionGenerator versionGenerator = new VersionGenerator("Test1.version.json");
 
-            Assert.Equal(repo.Head.Tip.Sha.Substring(0, 7), versionGenerator.CommitHash);
+            Assert.Equal(repo.Head.Tip.Sha, versionGenerator.CommitHash);
         }
 
         [Fact]
@@ -87,7 +87,7 @@ namespace GmodNET.VersionTool.Core.Tests
             using Repository repo = new Repository("../../../../");
 
             string expected_version = "1.1.1+codename.Test1.head." + new Regex(@"[^0-9A-Za-z-]+", RegexOptions.ECMAScript).Replace(repo.Head.FriendlyName, "-")
-                + ".commit." + repo.Head.Tip.Sha.Substring(0, 7);
+                + ".commit." + repo.Head.Tip.Sha;
 
             Assert.Equal(expected_version, versionGenerator.FullVersion);
         }
@@ -100,7 +100,7 @@ namespace GmodNET.VersionTool.Core.Tests
             using Repository repo = new Repository("../../../../");
 
             string expected_version = "2.2.2+head." + new Regex(@"[^0-9A-Za-z-]+", RegexOptions.ECMAScript).Replace(repo.Head.FriendlyName, "-")
-                + ".commit." + repo.Head.Tip.Sha.Substring(0, 7);
+                + ".commit." + repo.Head.Tip.Sha;
 
             Assert.Equal(expected_version, versionGenerator.FullVersion);
         }
@@ -119,7 +119,7 @@ namespace GmodNET.VersionTool.Core.Tests
             string expected_string = "3.0.2-alpha.1." 
                 + (new DateTimeOffset(time).ToUnixTimeSeconds() - new DateTimeOffset(new DateTime(2020, 1, 1), TimeSpan.Zero).ToUnixTimeSeconds()) 
                 + "." + head_name_normalized
-                + "+codename.Test3.head." + head_name_normalized + ".commit." + repo.Head.Tip.Sha.Substring(0, 7) + ".bugfix";
+                + "+codename.Test3.head." + head_name_normalized + ".commit." + repo.Head.Tip.Sha + ".bugfix";
 
             Assert.Equal(expected_string, versionGenerator.FullVersion);
         }
