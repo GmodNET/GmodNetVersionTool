@@ -78,11 +78,18 @@ namespace GmodNET.VersionTool.Core.Tests
         [Fact]
         public void BranchTest()
         {
-            using Repository repo = new Repository("../../../../");
+            using (TempRepoProvider tempRepo = new TempRepoProvider("Test1.version.json"))
+            {
+                using Repository repo = new Repository(tempRepo.RepoDirectory.FullName);
 
-            VersionGenerator versionGenerator = new VersionGenerator("Test1.version.json");
+                Branch test_branch = repo.CreateBranch("testbranch111");
 
-            Assert.Equal(repo.Head.FriendlyName, versionGenerator.BranchName);
+                Commands.Checkout(repo, test_branch);
+
+                VersionGenerator versionGenerator = new VersionGenerator(tempRepo.RepoVersionFilePath);
+
+                Assert.Equal("testbranch111", versionGenerator.BranchName);
+            }
         }
 
         [Fact]
