@@ -91,6 +91,11 @@ namespace GmodNET.VersionTool.Core
 
             using(Repository repo = new Repository(repository_directory.FullName))
             {
+                if(repo.Head.Tip == null)
+                {
+                    throw new ArgumentException("Version file is contained in the repository without commits or git HEAD is corrupted");
+                }
+
                 branch_name = repo.Head.FriendlyName;
 
                 StringBuilder version_string_builder = new StringBuilder();
