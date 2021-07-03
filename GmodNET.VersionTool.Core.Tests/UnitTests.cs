@@ -52,11 +52,14 @@ namespace GmodNET.VersionTool.Core.Tests
         [Fact]
         public void Test4()
         {
-            VersionGenerator versionGenerator = new VersionGenerator("Test2.version.json");
+            using (TempRepoProvider tempRepo = new TempRepoProvider("Test2.version.json"))
+            {
+                VersionGenerator versionGenerator = new VersionGenerator(tempRepo.RepoVersionFilePath);
 
-            Regex codename_checker = new Regex(@"codename", RegexOptions.ECMAScript);
+                Regex codename_checker = new Regex(@"codename", RegexOptions.ECMAScript);
 
-            Assert.DoesNotMatch(codename_checker, versionGenerator.FullVersion);
+                Assert.DoesNotMatch(codename_checker, versionGenerator.FullVersion);
+            }
         }
 
         [Fact]
