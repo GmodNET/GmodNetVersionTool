@@ -8,6 +8,7 @@ using LibGit2Sharp;
 using LibGit2Sharp.Handlers;
 using Semver;
 using System.IO;
+using GmodNET.VersionTool.Core.Tests.Helpers;
 
 namespace GmodNET.VersionTool.Core.Tests
 {
@@ -174,10 +175,9 @@ namespace GmodNET.VersionTool.Core.Tests
         [Fact]
         public void VersionFileIsNotInRepositoryTest()
         {
-            string temp_version_file_name = Path.GetTempPath() + Guid.NewGuid().ToString() + ".json";
-            File.Copy("Test3.version.json", temp_version_file_name);
-            Assert.Throws<ArgumentException>(() => { new VersionGenerator(temp_version_file_name); });
-            File.Delete(temp_version_file_name);
+            using TempVersionFileProvider temp_version_file = new TempVersionFileProvider();
+            File.Copy("Test3.version.json", temp_version_file.FilePath);
+            Assert.Throws<ArgumentException>(() => { new VersionGenerator(temp_version_file.FilePath); });
         }
     }
 }
