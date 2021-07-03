@@ -177,19 +177,22 @@ namespace GmodNET.VersionTool.Core.Tests
         [Fact]
         public void Test10()
         {
-            VersionGenerator versionGenerator = new VersionGenerator("Test3.version.json");
+            using (TempRepoProvider tempRepo = new TempRepoProvider("Test3.version.json"))
+            {
+                using Repository repo = new Repository(tempRepo.RepoDirectory.FullName);
 
-            using Repository repo = new Repository("../../../../");
+                Commands.Checkout(repo, repo.CreateBranch("uuuu8"));
 
-            DateTime time = repo.Head.Tip.Committer.When.UtcDateTime;
+                VersionGenerator versionGenerator = new VersionGenerator(tempRepo.RepoVersionFilePath);
 
-            string normalized_head_name = new Regex(@"[^0-9A-Za-z-]+", RegexOptions.ECMAScript).Replace(repo.Head.FriendlyName, "-");
+                DateTime time = repo.Head.Tip.Committer.When.UtcDateTime;
 
-            string expected_version = "3.0.2-alpha.1." 
-                + (new DateTimeOffset(time).ToUnixTimeSeconds() - new DateTimeOffset(new DateTime(2020, 1, 1), TimeSpan.Zero).ToUnixTimeSeconds())
-                + "." + normalized_head_name;
+                string expected_version = "3.0.2-alpha.1."
+                    + (new DateTimeOffset(time).ToUnixTimeSeconds() - new DateTimeOffset(new DateTime(2020, 1, 1), TimeSpan.Zero).ToUnixTimeSeconds())
+                    + ".uuuu8";
 
-            Assert.Equal(expected_version, versionGenerator.VersionWithoutBuildData);
+                Assert.Equal(expected_version, versionGenerator.VersionWithoutBuildData);
+            }
         }
 
         [Fact]
