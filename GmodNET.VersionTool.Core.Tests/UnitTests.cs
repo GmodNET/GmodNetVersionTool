@@ -223,5 +223,24 @@ namespace GmodNET.VersionTool.Core.Tests
                 Assert.Throws<ArgumentException>(() => new VersionGenerator(tempRepo.RepoVersionFilePath));
             }
         }
+
+        [Fact]
+        public void CommitTimeTest()
+        {
+            // DateTime structure which represents February 3nd, 2020. It must be 2851200 seconds since January 1st, 2020
+            DateTimeOffset commit_time = new DateTimeOffset(new DateTime(2020, 2, 3), TimeSpan.Zero);
+            using (TempRepoProvider tempRepo = new TempRepoProvider("Test3.version.json", commit_time))
+            {
+                using Repository repo = new Repository(tempRepo.RepoDirectory.FullName);
+
+                Commands.Checkout(repo, repo.CreateBranch("aabb"));
+
+                VersionGenerator version_generator = new VersionGenerator(tempRepo.RepoVersionFilePath);
+
+                string expected_version = "3.0.2-alpha.1.2851200.aabb";
+
+                Assert.Equal(expected_version, version_generator.VersionWithoutBuildData);
+            }
+        }
     }
 }
