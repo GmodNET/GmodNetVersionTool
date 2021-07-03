@@ -28,9 +28,12 @@ namespace GmodNET.VersionTool.Core.Tests
         [Fact]
         public void Test2()
         {
-            VersionGenerator version_generator = new VersionGenerator("Test2.version.json");
+            using (TempRepoProvider tempRepo = new TempRepoProvider("Test2.version.json"))
+            {
+                VersionGenerator version_generator = new VersionGenerator(tempRepo.RepoVersionFilePath);
 
-            Assert.Equal("2.2.2", version_generator.FullVersion.Split('+')[0]);
+                Assert.Equal("2.2.2", version_generator.FullVersion.Split('+')[0]);
+            }
         }
 
         [Fact]
