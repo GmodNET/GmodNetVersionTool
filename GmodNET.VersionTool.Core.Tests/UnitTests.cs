@@ -214,5 +214,14 @@ namespace GmodNET.VersionTool.Core.Tests
             File.Copy("Test3.version.json", temp_version_file.FilePath);
             Assert.Throws<ArgumentException>(() => { new VersionGenerator(temp_version_file.FilePath); });
         }
+
+        [Fact]
+        public void RepoHasNoCommitsTest()
+        {
+            using (TempRepoProvider tempRepo = new TempRepoProvider("Test1.version.json", DateTimeOffset.Now, false))
+            {
+                Assert.Throws<ArgumentException>(() => new VersionGenerator(tempRepo.RepoVersionFilePath));
+            }
+        }
     }
 }
