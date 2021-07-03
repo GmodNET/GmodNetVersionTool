@@ -65,11 +65,14 @@ namespace GmodNET.VersionTool.Core.Tests
         [Fact]
         public void CommitHashTest()
         {
-            using Repository repo = new Repository("../../../../");
+            using (TempRepoProvider tempRepo = new TempRepoProvider("Test1.version.json"))
+            {
+                using Repository repo = new Repository(tempRepo.RepoDirectory.FullName);
 
-            VersionGenerator versionGenerator = new VersionGenerator("Test1.version.json");
+                VersionGenerator versionGenerator = new VersionGenerator(tempRepo.RepoVersionFilePath);
 
-            Assert.Equal(repo.Head.Tip.Sha, versionGenerator.CommitHash);
+                Assert.Equal(repo.Head.Tip.Sha, versionGenerator.CommitHash);
+            }
         }
 
         [Fact]
