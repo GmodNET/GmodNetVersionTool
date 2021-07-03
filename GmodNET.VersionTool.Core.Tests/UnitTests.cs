@@ -140,20 +140,22 @@ namespace GmodNET.VersionTool.Core.Tests
         [Fact]
         public void Test7()
         {
-            VersionGenerator versionGenerator = new VersionGenerator("Test3.version.json");
+            using (TempRepoProvider tempRepo = new TempRepoProvider("Test3.version.json"))
+            {
+                using Repository repo = new Repository(tempRepo.RepoDirectory.FullName);
 
-            using Repository repo = new Repository("../../../../");
+                Commands.Checkout(repo, repo.CreateBranch("snd5"));
 
-            DateTime time = repo.Head.Tip.Committer.When.UtcDateTime;
+                VersionGenerator versionGenerator = new VersionGenerator(tempRepo.RepoVersionFilePath);
 
-            string head_name_normalized = new Regex(@"[^0-9A-Za-z-]+", RegexOptions.ECMAScript).Replace(repo.Head.FriendlyName, "-");
+                DateTime time = repo.Head.Tip.Committer.When.UtcDateTime;
 
-            string expected_string = "3.0.2-alpha.1." 
-                + (new DateTimeOffset(time).ToUnixTimeSeconds() - new DateTimeOffset(new DateTime(2020, 1, 1), TimeSpan.Zero).ToUnixTimeSeconds()) 
-                + "." + head_name_normalized
-                + "+codename.Test3.head." + head_name_normalized + ".commit." + repo.Head.Tip.Sha + ".bugfix";
+                string expected_string = "3.0.2-alpha.1."
+                    + (new DateTimeOffset(time).ToUnixTimeSeconds() - new DateTimeOffset(new DateTime(2020, 1, 1), TimeSpan.Zero).ToUnixTimeSeconds())
+                    + ".snd5+codename.Test3.head.snd5.commit." + repo.Head.Tip.Sha + ".bugfix";
 
-            Assert.Equal(expected_string, versionGenerator.FullVersion);
+                Assert.Equal(expected_string, versionGenerator.FullVersion);
+            }
         }
 
         [Fact]
