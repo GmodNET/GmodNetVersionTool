@@ -48,7 +48,7 @@ namespace GmodNET.VersionTool.Core.Tests.Helpers
 
         public string RepoVersionFilePath => version_file_path;
 
-        public TempRepoProvider(string version_file_to_copy_into_repo)
+        public TempRepoProvider(string version_file_to_copy_into_repo, DateTimeOffset time_of_the_initial_commit, bool make_initial_commit = true)
         {
             wasDisposed = false;
 
@@ -62,11 +62,19 @@ namespace GmodNET.VersionTool.Core.Tests.Helpers
 
             using Repository repository = new Repository(repoDirectory.FullName);
 
-            Commands.Stage(repository, "*");
+            if (make_initial_commit)
+            {
+                Commands.Stage(repository, "*");
 
-            Signature repo_commiter_signature = new Signature("Test runner", "support@gmodnet.xyz", DateTimeOffset.Now);
+                Signature repo_commiter_signature = new Signature("Test runner", "support@gmodnet.xyz", time_of_the_initial_commit);
 
-            repository.Commit("Initial commit", repo_commiter_signature, repo_commiter_signature);
+                repository.Commit("Initial commit", repo_commiter_signature, repo_commiter_signature);
+            }
+        }
+
+        public TempRepoProvider(string version_file_to_copy_into_repo) : this(version_file_to_copy_into_repo, DateTimeOffset.Now, true)
+        {
+
         }
 
         public void Dispose()
