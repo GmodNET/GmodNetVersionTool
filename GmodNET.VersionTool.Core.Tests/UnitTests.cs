@@ -123,14 +123,18 @@ namespace GmodNET.VersionTool.Core.Tests
         [Fact]
         public void Test6()
         {
-            VersionGenerator versionGenerator = new VersionGenerator("Test2.version.json");
+            using (TempRepoProvider tempRepo = new TempRepoProvider("Test2.version.json"))
+            {
+                using Repository repo = new Repository(tempRepo.RepoDirectory.FullName);
 
-            using Repository repo = new Repository("../../../../");
+                Commands.Checkout(repo, repo.CreateBranch("oh333"));
 
-            string expected_version = "2.2.2+head." + new Regex(@"[^0-9A-Za-z-]+", RegexOptions.ECMAScript).Replace(repo.Head.FriendlyName, "-")
-                + ".commit." + repo.Head.Tip.Sha;
+                VersionGenerator versionGenerator = new VersionGenerator(tempRepo.RepoVersionFilePath);
 
-            Assert.Equal(expected_version, versionGenerator.FullVersion);
+                string expected_version = "2.2.2+head.oh333.commit." + repo.Head.Tip.Sha;
+
+                Assert.Equal(expected_version, versionGenerator.FullVersion);
+            }
         }
 
         [Fact]
