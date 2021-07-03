@@ -39,11 +39,14 @@ namespace GmodNET.VersionTool.Core.Tests
         [Fact]
         public void Test3()
         {
-            VersionGenerator version_generator = new VersionGenerator("Test1.version.json");
+            using (TempRepoProvider tempRepo = new TempRepoProvider("Test1.version.json"))
+            {
+                VersionGenerator version_generator = new VersionGenerator(tempRepo.RepoVersionFilePath);
 
-            Regex codename_checker = new Regex(@"\+codename\.Test1", RegexOptions.ECMAScript);
+                Regex codename_checker = new Regex(@"\+codename\.Test1", RegexOptions.ECMAScript);
 
-            Assert.Matches(codename_checker, version_generator.FullVersion);
+                Assert.Matches(codename_checker, version_generator.FullVersion);
+            }
         }
 
         [Fact]
