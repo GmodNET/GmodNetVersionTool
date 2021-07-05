@@ -294,5 +294,30 @@ namespace GmodNET.VersionTool.Core.Tests
                 Assert.Equal("tag v3.2.1", versionGenerator.BranchName);
             }
         }
+
+        [Fact]
+        public void DetachedHeadTest()
+        {
+            using (TempRepoProvider tempRepo = new TempRepoProvider("Test1.version.json"))
+            {
+                using Repository repo = new Repository(tempRepo.RepoDirectory.FullName);
+                Commands.Checkout(repo, repo.CreateBranch("bd"));
+
+                Commit firstCommit = repo.Head.Tip;
+
+                File.Copy("Test3.version.json", Path.Combine(tempRepo.RepoDirectory.FullName, "Test3.version.json"));
+
+                Signature sig = new Signature("Test runner", "support@gmodnet.xyz", DateTimeOffset.Now);
+
+                Commands.Stage(repo, "*");
+                repo.Commit("Second commit", sig, sig);
+
+                Commands.Checkout(repo, firstCommit);
+
+                VersionGenerator versionGenerator = new VersionGenerator(tempRepo.RepoVersionFilePath);
+
+                Assert.Equal("detached HEAD", versionGenerator.BranchName);
+            }
+        }
     }
 }

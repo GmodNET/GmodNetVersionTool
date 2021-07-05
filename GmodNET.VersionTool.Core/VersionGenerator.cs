@@ -105,6 +105,11 @@ namespace GmodNET.VersionTool.Core
                 else
                 {
                     branch_name = repo.Head.FriendlyName;
+
+                    if (branch_name == "(no branch)")
+                    {
+                        branch_name = "detached HEAD";
+                    }
                 }
 
                 StringBuilder version_string_builder = new StringBuilder();
