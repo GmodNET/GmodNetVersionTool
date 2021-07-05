@@ -342,5 +342,28 @@ namespace GmodNET.VersionTool.Core.Tests
                 Assert.True(SemVersion.TryParse(versionGenerator.FullVersion, out _, true));
             }
         }
+
+        [Fact]
+        public void NormalizationTest2()
+        {
+            // DateTime structure which represents February 3nd, 2020. It must be 2851200 seconds since January 1st, 2020
+            DateTimeOffset commit_time = new DateTimeOffset(new DateTime(2020, 2, 3), TimeSpan.Zero);
+            using (TempRepoProvider tempRepo = new TempRepoProvider("Test1.version.json", commit_time))
+            {
+                using Repository repo = new Repository(tempRepo.RepoDirectory.FullName);
+
+                repo.ApplyTag("release/5.0.300");
+
+                VersionGenerator versionGenerator = new VersionGenerator(tempRepo.RepoVersionFilePath);
+
+                Assert.Equal("tag release/5.0.300", versionGenerator.BranchName);
+
+                string expected_version = "1.1.1+codename.Test1.head.tag-release-5-0-300.commit." + repo.Head.Tip.Sha;
+
+                Assert.Equal(expected_version, versionGenerator.FullVersion);
+
+                Assert.True(SemVersion.TryParse(versionGenerator.FullVersion, out _, true));
+            }
+        }
     }
 }
