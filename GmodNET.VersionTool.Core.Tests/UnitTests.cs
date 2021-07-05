@@ -278,5 +278,21 @@ namespace GmodNET.VersionTool.Core.Tests
                 Assert.Equal("tag release/2.2.2", versionGenerator.BranchName);
             }
         }
+
+        [Fact]
+        public void LightTagNameTest()
+        {
+            using (TempRepoProvider tempRepo = new TempRepoProvider("Test3.version.json"))
+            {
+                Repository repo = new Repository(tempRepo.RepoDirectory.FullName);
+                Commands.Checkout(repo, repo.CreateBranch("ccdd"));
+
+                repo.ApplyTag("v3.2.1");
+
+                VersionGenerator versionGenerator = new VersionGenerator(tempRepo.RepoVersionFilePath);
+
+                Assert.Equal("tag v3.2.1", versionGenerator.BranchName);
+            }
+        }
     }
 }
