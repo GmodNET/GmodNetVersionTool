@@ -248,7 +248,7 @@ namespace GmodNET.VersionTool.Core.Tests
         {
             using (TempRepoProvider tempRepo = new TempRepoProvider("Test3.version.json"))
             {
-                Repository repo = new Repository(tempRepo.RepoDirectory.FullName);
+                using Repository repo = new Repository(tempRepo.RepoDirectory.FullName);
                 Commands.Checkout(repo, repo.CreateBranch("ccdd"));
 
                 Signature sig = new Signature("Test runner", "support@gmodnet.xyz", DateTimeOffset.Now);
@@ -266,7 +266,7 @@ namespace GmodNET.VersionTool.Core.Tests
         {
             using (TempRepoProvider tempRepo = new TempRepoProvider("Test3.version.json"))
             {
-                Repository repo = new Repository(tempRepo.RepoDirectory.FullName);
+                using Repository repo = new Repository(tempRepo.RepoDirectory.FullName);
                 Commands.Checkout(repo, repo.CreateBranch("ccdd"));
 
                 Signature sig = new Signature("Test runner", "support@gmodnet.xyz", DateTimeOffset.Now);
@@ -284,7 +284,7 @@ namespace GmodNET.VersionTool.Core.Tests
         {
             using (TempRepoProvider tempRepo = new TempRepoProvider("Test3.version.json"))
             {
-                Repository repo = new Repository(tempRepo.RepoDirectory.FullName);
+                using Repository repo = new Repository(tempRepo.RepoDirectory.FullName);
                 Commands.Checkout(repo, repo.CreateBranch("ccdd"));
 
                 repo.ApplyTag("v3.2.1");
