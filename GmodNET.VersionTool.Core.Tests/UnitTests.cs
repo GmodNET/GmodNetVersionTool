@@ -242,5 +242,23 @@ namespace GmodNET.VersionTool.Core.Tests
                 Assert.Equal(expected_version, version_generator.VersionWithoutBuildData);
             }
         }
+
+        [Fact]
+        public void TagNameTest()
+        {
+            using (TempRepoProvider tempRepo = new TempRepoProvider("Test3.version.json"))
+            {
+                Repository repo = new Repository(tempRepo.RepoDirectory.FullName);
+                Commands.Checkout(repo, repo.CreateBranch("ccdd"));
+
+                Signature sig = new Signature("Test runner", "support@gmodnet.xyz", DateTimeOffset.Now);
+
+                repo.ApplyTag("1.2.3", sig, "Release 1.2.3");
+
+                VersionGenerator versionGenerator = new VersionGenerator(tempRepo.RepoVersionFilePath);
+
+                Assert.Equal("tag 1.2.3", versionGenerator.BranchName);
+            }
+        }
     }
 }
