@@ -319,5 +319,28 @@ namespace GmodNET.VersionTool.Core.Tests
                 Assert.Equal("detached HEAD", versionGenerator.BranchName);
             }
         }
+
+        [Fact]
+        public void NormalizationTest1()
+        {
+            // DateTime structure which represents February 3nd, 2020. It must be 2851200 seconds since January 1st, 2020
+            DateTimeOffset commit_time = new DateTimeOffset(new DateTime(2020, 2, 3), TimeSpan.Zero);
+            using (TempRepoProvider tempRepo = new TempRepoProvider("Test3.version.json", commit_time))
+            {
+                using Repository repo = new Repository(tempRepo.RepoDirectory.FullName);
+
+                Commands.Checkout(repo, repo.CreateBranch("feature/NewFeature"));
+
+                VersionGenerator versionGenerator = new VersionGenerator(tempRepo.RepoVersionFilePath);
+
+                Assert.Equal("feature/NewFeature", versionGenerator.BranchName);
+
+                string expected_version = "3.0.2-alpha.1.2851200.feature-NewFeature+codename.Test3.head.feature-NewFeature.commit." + repo.Head.Tip.Sha + ".bugfix";
+
+                Assert.Equal(expected_version, versionGenerator.FullVersion);
+
+                Assert.True(SemVersion.TryParse(versionGenerator.FullVersion, out _, true));
+            }
+        }
     }
 }
