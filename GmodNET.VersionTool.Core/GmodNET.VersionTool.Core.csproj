@@ -28,7 +28,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="semver" Version="2.0.6" />
     <PackageReference Include="LibGit2Sharp" Version="0.27.0-preview-0100" />
-    <PackageReference Include="GmodNET.VersionTool.MSBuild" Version="2.0.0-alpha.1.47401343.main">
+    <PackageReference Include="GmodNET.VersionTool.MSBuild" Version="2.0.0-preview.1.48190738.main">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
