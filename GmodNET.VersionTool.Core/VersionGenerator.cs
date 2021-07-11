@@ -40,7 +40,7 @@ namespace GmodNET.VersionTool.Core
         }
 
         /// <summary>
-        /// Returnes the current git repositiry HEAD branch name in human-readable format.
+        /// Returnes the current git repositiry HEAD name in human-readable format.
         /// </summary>
         public string BranchName
         {
@@ -48,7 +48,7 @@ namespace GmodNET.VersionTool.Core
         }
 
         /// <summary>
-        /// Returnes first 7 symbols of the current git commit hash.
+        /// Returnes current git commit hash as a hex string.
         /// </summary>
         public string CommitHash
         {

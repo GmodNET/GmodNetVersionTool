@@ -33,3 +33,32 @@ The resulting version number has the form `[FullVersion]+codename.[codename from
   "Codename": "Ural"
 }
 ```
+
+## GmodNET.VersionTool.Core NuGet package
+
+GmodNET.VersionTool.Core package is .NET library which exposes `VersionGenerator` class.
+
+`VersionGenerator` constructor takes path to a version file and returns an instance with build data which can be accessed via `FullVersion`, `VersionWithoutBuildData`, `BranchName`, and `CommitHash` properties.
+
+
+## GmodNET.VersionTool CLI tool
+
+GmodNET.VersionTool is a [.NET command line tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools) which can be acquired via NuGet. GmodNET.VersionTool has short name `gmodnet-vt`and can be invoked as `dotnet gmodnet-vt` if installed as local tool and simply as `gmodnet-vt` if installed as global tool.
+
+GmodNET.VersionTool can provide full generated version, build version without build metadata, git HEAD name, and commit hash.
+
+GmodNET.VersionTool has built-in usage help.
+
+
+## GmodNET.VersionTool.MSBuild NuGet package
+
+GmodNET.VersionTool.MSBuild package contains MSBuild Tasks and Targets to automatically set `Version` and `PackageVersion` properties of MSBuild project on build.
+
+To use GmodNET.VersionTool.MSBuild one just should reference corresponding NuGet package and specify version file via `VersionFile` item in the project file:
+
+```xml
+<ItemGroup>
+  <PackageReference Include="GmodNET.VersionTool.MSBuild" Version="2.0.0" PrivateAssets="All"/>
+  <VersionFile Include="../version.json" />
+</ItemGroup>
+```
