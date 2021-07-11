@@ -1,4 +1,7 @@
 # GmodNET Version Tool
+[![MSBuild Target NuGet Link](https://img.shields.io/nuget/v/GmodNET.VersionTool.MSBuild?label=MSBuild%20Target&style=plastic)](https://www.nuget.org/packages/GmodNET.VersionTool.MSBuild/)
+[![Class Library NuGet Link](https://img.shields.io/nuget/v/GmodNET.VersionTool.Core?label=Class%20Library&style=plastic)](https://www.nuget.org/packages/GmodNET.VersionTool.Core/)
+[![CLI Tool NuGet Link](https://img.shields.io/nuget/v/GmodNET.VersionTool?label=CLI%20Tool&style=plastic)](https://www.nuget.org/packages/GmodNET.VersionTool/)
 
 A git-based [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html) compatible version number generator.
 
@@ -33,7 +36,7 @@ You can read about version number generation in more detail in the Version Tool 
 
 ## Usage
 
-The most straightforward way to use GmodNET Version Tool with .NET projects is to consume GmodNET.VersionTool.MSBuild NuGet package. Just add package reference and specify version file to use by adding similar `ItemGroup` to your MSBuild project:
+The most straightforward way to use GmodNET Version Tool with .NET projects is to consume [GmodNET.VersionTool.MSBuild NuGet package](https://www.nuget.org/packages/GmodNET.VersionTool.MSBuild/). Just add package reference and specify version file to use by adding similar `ItemGroup` to your MSBuild project:
 ```xml
 <ItemGroup>
   <PackageReference Include="GmodNET.VersionTool.MSBuild" Version="2.0.0" PrivateAssets="All"/>
@@ -41,8 +44,8 @@ The most straightforward way to use GmodNET Version Tool with .NET projects is t
 </ItemGroup>
 ```
 
-GmodNET.VersionTool.MSBuild will automatically generate version number and set `Version` and `PackageVersion` properties for each build.
+[GmodNET.VersionTool.MSBuild](https://www.nuget.org/packages/GmodNET.VersionTool.MSBuild/) will automatically generate version number and set `Version` and `PackageVersion` properties for each build.
 
-There is a cross-platform [.NET command line tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools) implementation of GmodNET Version Tool: GmodNET.VersionTool. It can be used from shell or any other build systems like make, cmake, etc.
+There is a cross-platform [.NET command line tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools) implementation of GmodNET Version Tool: [GmodNET.VersionTool](https://www.nuget.org/packages/GmodNET.VersionTool/). It can be used from shell or any other build systems like make, cmake, etc.
 
-GmodNET.VersioTool.Core is a NuGet package containing .NET Standard 2.0 class library which can be used to generate version numbers from other .NET applications.
+[GmodNET.VersioTool.Core](https://www.nuget.org/packages/GmodNET.VersionTool.Core/) is a NuGet package containing .NET Standard 2.0 class library which can be used to generate version numbers from other .NET applications.
