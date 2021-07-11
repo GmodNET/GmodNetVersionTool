@@ -40,7 +40,7 @@ namespace GmodNET.VersionTool.Core
         }
 
         /// <summary>
-        /// Returnes the current git repositiry HEAD branch name in human-readable format.
+        /// Returnes the current git repositiry HEAD name in human-readable format.
         /// </summary>
         public string BranchName
         {
@@ -48,7 +48,7 @@ namespace GmodNET.VersionTool.Core
         }
 
         /// <summary>
-        /// Returnes first 7 symbols of the current git commit hash.
+        /// Returnes current git commit hash as a hex string.
         /// </summary>
         public string CommitHash
         {
@@ -83,11 +83,34 @@ namespace GmodNET.VersionTool.Core
             while(!repository_directory.GetDirectories().Where(info => info.Name == ".git").Any())
             {
                 repository_directory = repository_directory.Parent;
+                if (repository_directory == null)
+                {
+                    throw new ArgumentException("Version file is not contained in any git repository");
+                }
             }
 
             using(Repository repo = new Repository(repository_directory.FullName))
             {
-                branch_name = repo.Head.FriendlyName;
+                if (repo.Head.Tip == null)
+                {
+                    throw new ArgumentException("Version file is contained in the repository without commits or git HEAD is corrupted");
+                }
+
+                Tag commitTag = repo.Tags.FirstOrDefault(t => t.PeeledTarget.Id == repo.Head.Tip.Id);
+
+                if (commitTag != default)
+                {
+                    branch_name = "tag " + commitTag.FriendlyName;
+                }
+                else
+                {
+                    branch_name = repo.Head.FriendlyName;
+
+                    if (branch_name == "(no branch)")
+                    {
+                        branch_name = "detached HEAD";
+                    }
+                }
 
                 StringBuilder version_string_builder = new StringBuilder();
 
@@ -138,7 +161,7 @@ namespace GmodNET.VersionTool.Core
                 version_string_builder.Append("commit");
                 version_string_builder.Append('.');
                 
-                commit_hash = repo.Head.Tip.Sha.Substring(0, 7);
+                commit_hash = repo.Head.Tip.Sha;
 
                 version_string_builder.Append(commit_hash);
 

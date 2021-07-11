@@ -15,6 +15,9 @@
       GmodNETVersionToolTarget;
       $(GetPackageVersionDependsOn)
     </GetPackageVersionDependsOn>
+
+    <!-- Make tool work well with Microsoft SourceLink -->
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
 
   <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)/../Tasks/netcoreapp3.1/GmodNET.VersionTool.MSBuild.dll" TaskName="GmodNET.VersionTool.MSBuild.VersionToolGenerate"

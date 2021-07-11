@@ -1,10 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="../GmodNET.VersionTool.Target/GmodNET.VersionTool.Target.targets" />
-
   <PropertyGroup>
     <TargetFrameworks>net472;netcoreapp3.1;netstandard2.0</TargetFrameworks>
-    <VersionFilePath>../version.json</VersionFilePath>
     <DevelopmentDependency>true</DevelopmentDependency>
     <PackageIcon>icon.png</PackageIcon>
     <Product>GmodNET.VersionTool MSBuild task.</Product>
@@ -58,6 +55,41 @@
       <_PackageFiles Remove="**/System.*.dll" />
       <_PackageFiles Remove="**/Microsoft.*.dll" />
     </ItemGroup>
+  </Target>
+  
+  <!-- Version generation below -->
+    
+  <PropertyGroup>
+    <VersionDependsOn>
+      GmodNETVersionToolTarget;
+      $(VersionDependsOn)
+    </VersionDependsOn>
+
+    <GenerateNuspecDependsOn>
+      GmodNETVersionToolTarget;
+      $(GenerateNuspecDependsOn)
+    </GenerateNuspecDependsOn>
+
+    <GetPackageVersionDependsOn>
+      GmodNETVersionToolTarget;
+      $(GetPackageVersionDependsOn)
+    </GetPackageVersionDependsOn>
+
+    <!-- Make tool work well with Microsoft SourceLink -->
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+  </PropertyGroup>
+
+  <Target Name="GmodNETVersionToolTarget" BeforeTargets="BeforeBuild">
+    <Exec Command="dotnet tool restore" />
+    <Exec Command="dotnet gmodnet-vt getVersion ../version.json" ConsoleToMsBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="Version" />
+    </Exec>
+    <Exec Command="dotnet gmodnet-vt getVersion --skip-build-data ../version.json" ConsoleToMsBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="PackageVersion" />
+    </Exec>
+
+    <Message Text="(GmodNET.VersionTool.MSBuild) Generated Version: $(Version)" Importance="high" />
+    <Message Text="(GmodNET.VersionTool.MSBuild) Generated Package Version: $(PackageVersion)" Importance="high" />
   </Target>
 
 </Project>

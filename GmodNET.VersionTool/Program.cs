@@ -47,7 +47,7 @@ namespace GmodNET.VersionTool
                 }
             });
 
-            Command getCommitCommand = new Command("getCommit", "Get the git commit hash (first 7 symbols) of the the given version.");
+            Command getCommitCommand = new Command("getCommit", "Get the current git commit hash.");
 
             getCommitCommand.AddArgument(path_to_version_file_arg);
 
@@ -58,7 +58,7 @@ namespace GmodNET.VersionTool
                 Console.WriteLine(versionGenerator.CommitHash);
             });
 
-            Command getBranchNameCommand = new Command("getBranchName", "Get the git branch of the given version.");
+            Command getBranchNameCommand = new Command("getBranchName", "Get the current git HEAD name.");
 
             getBranchNameCommand.AddArgument(path_to_version_file_arg);
 
