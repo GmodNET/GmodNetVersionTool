@@ -2,8 +2,7 @@
 using System;
 using System.IO;
 using Semver;
-using LibGit2Sharp;
-using LibGit2Sharp.Handlers;
+using ManagedGitLib;
 using System.Text;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -73,7 +72,7 @@ namespace GmodNET.VersionTool.Core
 
             SemVersion version_from_file;
 
-            if(versionStruct.Version == null || versionStruct.Version == String.Empty || !SemVersion.TryParse(versionStruct.Version, out version_from_file, true))
+            if (string.IsNullOrEmpty(versionStruct.Version) || !SemVersion.TryParse(versionStruct.Version, out version_from_file, true))
             {
                 throw new ArgumentException("Version JSON file does not contain proper Version value", "path_to_version_file");
             }
@@ -89,24 +88,27 @@ namespace GmodNET.VersionTool.Core
                 }
             }
 
-            using(Repository repo = new Repository(repository_directory.FullName))
+            using(GitRepository repo = GitRepository.Create(repository_directory.FullName))
             {
-                if (repo.Head.Tip == null)
+                if (repo.GetHeadCommit() == null)
                 {
                     throw new ArgumentException("Version file is contained in the repository without commits or git HEAD is corrupted");
                 }
 
-                Tag commitTag = repo.Tags.FirstOrDefault(t => t.PeeledTarget.Id == repo.Head.Tip.Id);
-
-                if (commitTag != default)
+                if (repo.GetAllTags().Any(t => t.Target == repo.GetHeadCommit().Value.Sha))
                 {
-                    branch_name = "tag " + commitTag.FriendlyName;
+                    GitTag commitTag = repo.GetAllTags().FirstOrDefault(t => t.Target == repo.GetHeadCommit().Value.Sha);
+                    branch_name = "tag " + commitTag.Name;
                 }
                 else
                 {
-                    branch_name = repo.Head.FriendlyName;
+                    object head = repo.GetHeadAsReferenceOrSha();
 
-                    if (branch_name == "(no branch)")
+                    if (head is string headName)
+                    {
+                        branch_name = headName.Substring("refs/heads/".Length);
+                    }
+                    else
                     {
                         branch_name = "detached HEAD";
                     }
@@ -123,12 +125,12 @@ namespace GmodNET.VersionTool.Core
                 version_string_builder.Append('.');
                 version_string_builder.Append(version_from_file.Patch);
 
-                if(version_from_file.Prerelease != null && version_from_file.Prerelease != String.Empty)
+                if (!string.IsNullOrEmpty(version_from_file.Prerelease))
                 {
                     version_string_builder.Append('-');
                     version_string_builder.Append(version_from_file.Prerelease);
 
-                    DateTime commit_time = repo.Head.Tip.Committer.When.UtcDateTime;
+                    DateTime commit_time = repo.GetHeadCommit().Value.Committer.Date.UtcDateTime;
                     DateTimeOffset commit_time_offset = new DateTimeOffset(commit_time);
 
                     // The numerical constant here is UNIX time of January 1st, 2020 12:00 AM UTC
@@ -146,7 +148,7 @@ namespace GmodNET.VersionTool.Core
                 version_string_builder.Append('+');
 
                 Regex codename_regex = new Regex(@"^[0-9A-Za-z-]+$", RegexOptions.ECMAScript | RegexOptions.Compiled);
-                if(versionStruct.Codename != null && versionStruct.Codename != String.Empty && codename_regex.IsMatch(versionStruct.Codename))
+                if (!string.IsNullOrEmpty(versionStruct.Codename) && codename_regex.IsMatch(versionStruct.Codename))
                 {
                     version_string_builder.Append("codename");
                     version_string_builder.Append('.');
@@ -161,11 +163,11 @@ namespace GmodNET.VersionTool.Core
                 version_string_builder.Append("commit");
                 version_string_builder.Append('.');
                 
-                commit_hash = repo.Head.Tip.Sha;
+                commit_hash = repo.GetHeadCommit().Value.Sha.ToString();
 
                 version_string_builder.Append(commit_hash);
 
-                if(version_from_file.Build != null && version_from_file.Build != String.Empty)
+                if (!string.IsNullOrEmpty(version_from_file.Build))
                 {
                     version_string_builder.Append('.');
                     version_string_builder.Append(version_from_file.Build);

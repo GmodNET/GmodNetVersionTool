@@ -27,7 +27,7 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="semver" Version="2.0.6" />
-    <PackageReference Include="LibGit2Sharp" Version="0.27.0-preview-0100" />
+    <PackageReference Include="ManagedGitLib" Version="0.1.0" />
     <PackageReference Include="GmodNET.VersionTool.MSBuild" Version="2.0.0">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
