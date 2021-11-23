@@ -44,6 +44,7 @@
       <_PackageFiles Remove="**/*.xml" />
       <_PackageFiles Remove="**/System.*.dll" />
       <_PackageFiles Remove="**/Microsoft.*.dll" />
+      <_PackageFiles Remove="**/*.pdb" />
     </ItemGroup>
   </Target>
   
