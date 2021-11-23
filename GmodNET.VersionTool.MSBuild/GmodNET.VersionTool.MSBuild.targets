@@ -20,11 +20,9 @@
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
 
-  <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)/../Tasks/netcoreapp3.1/GmodNET.VersionTool.MSBuild.dll" TaskName="GmodNET.VersionTool.MSBuild.VersionToolGenerate"
-             Condition="'$(MSBuildRuntimeType)' == 'Core'" />
-
-  <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)/../Tasks/net472/GmodNET.VersionTool.MSBuild.dll" TaskName="GmodNET.VersionTool.MSBuild.VersionToolGenerate"
-             Condition="'$(MSBuildRuntimeType)' != 'Core'" />
+  <UsingTask 
+    AssemblyFile="$(MSBuildThisFileDirectory)/../Tasks/netstandard2.0/GmodNET.VersionTool.MSBuild.dll" 
+    TaskName="GmodNET.VersionTool.MSBuild.VersionToolGenerate" />
 
   <Target Name="GmodNETVersionToolTarget" BeforeTargets="BeforeBuild">
     <VersionToolGenerate VersionFiles="@(VersionFile)">

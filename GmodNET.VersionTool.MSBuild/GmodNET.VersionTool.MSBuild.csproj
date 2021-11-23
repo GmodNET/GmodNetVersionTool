@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net472;netcoreapp3.1;netstandard2.0</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <DevelopmentDependency>true</DevelopmentDependency>
     <PackageIcon>icon.png</PackageIcon>
     <Product>GmodNET.VersionTool MSBuild task.</Product>
@@ -36,20 +36,10 @@
     <Content Include="../icon.png" PackagePath="/" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <Compile Remove="*" />
-  </ItemGroup>
-
   <Target Name="PackTaskDependencies" BeforeTargets="GenerateNuspec">
     <ItemGroup>
-      <_PackageFiles Include="bin/$(Configuration)/net472/*.*">
-        <PackagePath>Tasks/net472/</PackagePath>
-      </_PackageFiles>
-      <_PackageFiles Include="bin/$(Configuration)/netcoreapp3.1/*.*">
-        <PackagePath>Tasks/netcoreapp3.1/</PackagePath>
-      </_PackageFiles>
-      <_PackageFiles Include="bin/$(Configuration)/netcoreapp3.1/runtimes/**/*.*">
-        <PackagePath>Tasks/netcoreapp3.1/runtimes/</PackagePath>
+      <_PackageFiles Include="bin/$(Configuration)/netstandard2.0/*.*">
+        <PackagePath>Tasks/netstandard2.0/</PackagePath>
       </_PackageFiles>
       <_PackageFiles Remove="**/*.xml" />
       <_PackageFiles Remove="**/System.*.dll" />
