@@ -11,8 +11,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.0.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0" />
+  </ItemGroup>
 
-    <ProjectReference Include="..\GmodNET.VersionTool.Core\GmodNET.VersionTool.Core.csproj" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\GmodNET.VersionTool.Core\GmodNET.VersionTool.Core.csproj" />
   </ItemGroup>
 
 </Project>
