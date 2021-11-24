@@ -253,7 +253,7 @@ namespace GmodNET.VersionTool.Core.Tests
 
                 Signature sig = new Signature("Test runner", "support@gmodnet.xyz", DateTimeOffset.Now);
 
-                repo.ApplyTag("1.2.3", sig, "Release 1.2.3");
+                repo.ApplyTag("1.2.3");
 
                 VersionGenerator versionGenerator = new VersionGenerator(tempRepo.RepoVersionFilePath);
 
@@ -271,7 +271,7 @@ namespace GmodNET.VersionTool.Core.Tests
 
                 Signature sig = new Signature("Test runner", "support@gmodnet.xyz", DateTimeOffset.Now);
 
-                repo.ApplyTag("release/2.2.2", sig, "Version 2.2.2");
+                repo.ApplyTag("release/2.2.2");
 
                 VersionGenerator versionGenerator = new VersionGenerator(tempRepo.RepoVersionFilePath);
 
