@@ -66,7 +66,37 @@ To use GmodNET.VersionTool.MSBuild one just should reference corresponding NuGet
 ## GmodNET.VersionTool.SourceGenerator
 
 GmodNET.VersionTool.SourceGenerator package contains C# Source Generator,
-which generates a `GmodNET.VersionTool.Info.cs` file, which contains build version data.
+which generates a `GmodNET.VersionTool.Info.cs` file, which contains build version data:
+
+```csharp
+using System;
+
+namespace GmodNET.VersionTool.Info
+{
+    internal static class BuildInfo
+    {
+        /// <summary>
+        /// Gets a full version with build metadata.
+        /// </summary>
+        public static string FullVersion => "3.4.5-beta.2.60030416.main+head.main.commit.e0c1ad9f485ea34ea5ad640d60487ec46e238c44";
+
+        /// <summary>
+        /// Gets a version without build metadata.
+        /// </summary>
+        public static string VersionWithoutBuildData => "3.4.5-beta.2.60030416.main";
+
+        /// <summary>
+        /// Gets build's commit git repository HEAD name in human-readable format.
+        /// </summary>
+        public static string BranchName => "main";
+
+        /// <summary>
+        /// Gets build's commit hash as a hex string.
+        /// </summary>
+        public static string CommitHash => "e0c1ad9f485ea34ea5ad640d60487ec46e238c44";
+    }
+}
+```
 
 Path to version file is specified via `VersionFile` MSBuild Item,
 just like with GmodNET.VersionTool.MSBuild.
