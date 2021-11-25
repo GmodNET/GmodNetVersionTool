@@ -46,4 +46,11 @@
     <None Remove="$(OutputPath)\*.pdb" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="GmodNET.VersionTool.SourceGenerator.props" PackagePath="buildMultiTargeting/" />
+    <Content Include="GmodNET.VersionTool.SourceGenerator.props" PackagePath="build/" />
+    <Content Include="GmodNET.VersionTool.SourceGenerator.targets" PackagePath="buildMultiTargeting/" />
+    <Content Include="GmodNET.VersionTool.SourceGenerator.targets" PackagePath="build/" />
+  </ItemGroup>
+
 </Project>
