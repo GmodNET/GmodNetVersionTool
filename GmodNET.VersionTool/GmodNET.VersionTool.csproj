@@ -23,6 +23,7 @@
 			GmodNET.VersionTool command-line tool. Run as `dotnet gmodnet-vt`.
 		</Description>
 		<PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageTags>build-tool; versioning</PackageTags>
 		<RepositoryUrl>https://github.com/GmodNET/GmodNetVersionTool</RepositoryUrl>
@@ -42,6 +43,7 @@
 	<ItemGroup>
     <VersionFile Include="../version.json" />
 		<Content Include="../icon.png" PackagePath="/" />
+    <Content Include="../README.md" Pack="true" PackagePath="/"/>
 	</ItemGroup>
 
 </Project>
