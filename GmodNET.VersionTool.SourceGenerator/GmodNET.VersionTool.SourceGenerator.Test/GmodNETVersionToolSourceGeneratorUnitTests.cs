@@ -54,7 +54,7 @@ namespace GmodNET.VersionTool.Info
 }}";
 
         [Fact]
-        public async Task TestMethod1()
+        public async Task TestGeneratedFile()
         {
             string filePath = Path.GetFullPath("Test1.version.json");
 
