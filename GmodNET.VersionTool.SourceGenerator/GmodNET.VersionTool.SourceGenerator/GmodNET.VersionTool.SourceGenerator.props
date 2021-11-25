@@ -1,5 +1,5 @@
 ﻿<Project>
-  <PropertyGroup>
+  <ItemGroup>
     <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="IsVersionFile" />
-  </PropertyGroup>
+  </ItemGroup>
 </Project>
