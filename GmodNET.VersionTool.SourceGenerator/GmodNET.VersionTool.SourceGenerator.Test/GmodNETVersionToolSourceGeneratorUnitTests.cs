@@ -1,59 +1,92 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
-using VerifyCS = GmodNET.VersionTool.SourceGenerator.Test.CSharpCodeFixVerifier<
-    GmodNET.VersionTool.SourceGenerator.GmodNETVersionToolSourceGeneratorAnalyzer,
-    GmodNET.VersionTool.SourceGenerator.GmodNETVersionToolSourceGeneratorCodeFixProvider>;
+﻿using System.Threading.Tasks;
+using Xunit;
+using GmodNET.VersionTool.SourceGenerator;
+using GmodNET.VersionTool.Core;
+using Microsoft.CodeAnalysis.CSharp.Testing;
+using Microsoft.CodeAnalysis.Testing;
+using System.IO;
+using System.Linq;
+using VerifyCS = 
+    GmodNET.VersionTool.SourceGenerator.Test.GmodNetSourceGeneratorVerifier<GmodNET.VersionTool.SourceGenerator.GmodNETVersionToolSourceGenerator>;
 
 namespace GmodNET.VersionTool.SourceGenerator.Test
 {
-    [TestClass]
     public class GmodNETVersionToolSourceGeneratorUnitTest
     {
-        //No diagnostics expected to show up
-        [TestMethod]
+        static string SampleCode => $@"
+using System;
+
+namespace GmodNET.VersionTool.SourceGenerator.Test
+{{
+    internal class Class1
+    {{
+    }}
+}}";
+
+        static string GetExpectedGeneratorResult(string fullVersion, string version, string branch, string commitSha) =>
+            $@"
+using System;
+
+namespace GmodNET.VersionTool.Info
+{{
+    internal static class BuildInfo
+    {{
+        /// <summary>
+        /// Gets a full version with build metadata.
+        /// </summary>
+        public static string FullVersion => ""{fullVersion}"";
+
+        /// <summary>
+        /// Gets a version without build metadata.
+        /// </summary>
+        public static string VersionWithoutBuildData => ""{version}"";
+
+        /// <summary>
+        /// Gets build's commit git repository HEAD name in human-readable format.
+        /// </summary>
+        public static string BranchName => ""{branch}"";
+
+        /// <summary>
+        /// Gets build's commit hash as a hex string.
+        /// </summary>
+        public static string CommitHash => ""{commitSha}"";
+    }}
+}}";
+
+        [Fact]
         public async Task TestMethod1()
         {
-            var test = @"";
+            string filePath = Path.GetFullPath("Test1.version.json");
 
-            await VerifyCS.VerifyAnalyzerAsync(test);
-        }
+            VersionGenerator gen = new VersionGenerator(filePath);
 
-        //Diagnostic and CodeFix both triggered and checked for
-        [TestMethod]
-        public async Task TestMethod2()
-        {
-            var test = @"
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Diagnostics;
+            var test =  new VerifyCS.Test
+            {
+                TestState =
+                {
+                    Sources = { SampleCode },
+                    AdditionalFiles =
+                    {
+                        (filePath, File.ReadAllText(filePath))
+                    },
+                    AnalyzerConfigFiles =
+                    {
+                        ("/.globalconfig", $@"
+is_global = true
+[{filePath}]
+build_metadata.AdditionalFiles.IsVersionFile = true
+"),
+                    },
+                    GeneratedSources =
+                    {
+                        (typeof(GmodNETVersionToolSourceGenerator), "GmodNET.VersionTool.Info.cs",
+                            GetExpectedGeneratorResult(gen.FullVersion, gen.VersionWithoutBuildData,
+                                gen.BranchName, gen.CommitHash))
+                    }
+                },
+            };
 
-    namespace ConsoleApplication1
-    {
-        class {|#0:TypeName|}
-        {   
-        }
-    }";
-
-            var fixtest = @"
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Diagnostics;
-
-    namespace ConsoleApplication1
-    {
-        class TYPENAME
-        {   
-        }
-    }";
-
-            var expected = VerifyCS.Diagnostic("GmodNETVersionToolSourceGenerator").WithLocation(0).WithArguments("TypeName");
-            await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
+            await test.RunAsync();
         }
     }
 }
