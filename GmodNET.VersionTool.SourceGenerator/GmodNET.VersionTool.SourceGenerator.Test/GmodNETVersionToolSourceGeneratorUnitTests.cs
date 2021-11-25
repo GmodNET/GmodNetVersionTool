@@ -60,7 +60,7 @@ namespace GmodNET.VersionTool.Info
 
             VersionGenerator gen = new VersionGenerator(filePath);
 
-            var test =  new VerifyCS.Test
+            var test = new VerifyCS.Test
             {
                 TestState =
                 {
@@ -85,6 +85,24 @@ build_metadata.AdditionalFiles.IsVersionFile = true
                                 gen.BranchName, gen.CommitHash))
                     }
                 },
+            };
+
+            await test.RunAsync();
+        }
+
+        [Fact]
+        public async Task TryRiseError()
+        {
+            var test = new VerifyCS.Test
+            {
+                TestState =
+                {
+                    Sources = { SampleCode },
+                    ExpectedDiagnostics =
+                    {
+                        DiagnosticResult.CompilerError("GNVT001")
+                    }
+                }
             };
 
             await test.RunAsync();
