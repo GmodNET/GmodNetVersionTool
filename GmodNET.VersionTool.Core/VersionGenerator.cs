@@ -28,7 +28,7 @@ namespace GmodNET.VersionTool.Core
         }
 
         /// <summary>
-        /// Returnes a generated version.
+        /// Returns a generated version.
         /// <remarks>
         /// Unlike <see cref="FullVersion" /> returned string does not contain build metadata.
         /// </remarks>
@@ -39,7 +39,7 @@ namespace GmodNET.VersionTool.Core
         }
 
         /// <summary>
-        /// Returnes the current git repositiry HEAD name in human-readable format.
+        /// Returns the current git repository HEAD name in human-readable format.
         /// </summary>
         public string BranchName
         {
@@ -47,7 +47,7 @@ namespace GmodNET.VersionTool.Core
         }
 
         /// <summary>
-        /// Returnes current git commit hash as a hex string.
+        /// Returns current git commit hash as a hex string.
         /// </summary>
         public string CommitHash
         {
