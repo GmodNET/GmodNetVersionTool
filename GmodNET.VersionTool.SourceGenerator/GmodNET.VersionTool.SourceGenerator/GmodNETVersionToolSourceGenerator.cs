@@ -66,7 +66,7 @@ namespace GmodNET.VersionTool.SourceGenerator
             {
                 VersionGenerator gen = new VersionGenerator(versionFiles.First().Path);
 
-                context.AddSource("GmodNET.VersionTool.Info", $@"
+                context.AddSource("GmodNET.VersionTool.Info.cs", $@"
 using System;
 
 namespace GmodNET.VersionTool.Info

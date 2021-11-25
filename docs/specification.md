@@ -62,3 +62,11 @@ To use GmodNET.VersionTool.MSBuild one just should reference corresponding NuGet
   <VersionFile Include="../version.json" />
 </ItemGroup>
 ```
+
+## GmodNET.VersionTool.SourceGenerator
+
+GmodNET.VersionTool.SourceGenerator package contains C# Source Generator,
+which generates a `GmodNET.VersionTool.Info.cs` file, which contains build version data.
+
+Path to version file is specified via `VersionFile` MSBuild Item,
+just like with GmodNET.VersionTool.MSBuild.
