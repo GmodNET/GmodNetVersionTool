@@ -49,6 +49,7 @@ jobs:
            dotnet nuget push nupkgs/GmodNET.VersionTool.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
            dotnet nuget push nupkgs/GmodNET.VersionTool.Core.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
            dotnet nuget push nupkgs/GmodNET.VersionTool.MSBuild.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
+           dotnet nuget push nupkgs/GmodNET.VersionTool.SourceGenerator.*.nupkg --source gmodnet-packages --skip-duplicate --api-key az
 
     - name: Push NuGets to NuGet.org
       if: github.event_name == 'release' && github.event.action == 'published' && github.repository_owner == 'GmodNET'
@@ -56,3 +57,4 @@ jobs:
            dotnet nuget push nupkgs/GmodNET.VersionTool.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
            dotnet nuget push nupkgs/GmodNET.VersionTool.Core.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
            dotnet nuget push nupkgs/GmodNET.VersionTool.MSBuild.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
+           dotnet nuget push nupkgs/GmodNET.VersionTool.SourceGenerator.*.nupkg --source nuget --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}

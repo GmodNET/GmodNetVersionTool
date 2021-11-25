@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <NoWarn>RS2008</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>GmodNET.VersionTool.SourceGenerator</PackageId>
+    <Description>GmodNET.VersionTool C# Source Generator</Description>
+    <PackageTags>analyzers; build-tool; versioning</PackageTags>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+    <RepositoryUrl>https://github.com/GmodNET/GmodNetVersionTool</RepositoryUrl>
+    <Company>GmodNET</Company>
+    <Copyright>Copyright (c) 2021 GmodNET</Copyright>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/GmodNET/GmodNetVersionTool</RepositoryUrl>
+    <PackageIcon>icon.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.9.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.0.0" PrivateAssets="all" />
+    <PackageReference Include="GmodNET.VersionTool.MSBuild" Version="2.0.0" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\GmodNET.VersionTool.Core\GmodNET.VersionTool.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <VersionFile Include="../../version.json" />
+    <Content Include="../../icon.png" PackagePath="/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <None Include="$(OutputPath)\*.*" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <None Remove="$(OutputPath)\System.*.dll" />
+    <None Remove="$(OutputPath)\Microsoft.*.dll" />
+    <None Remove="$(OutputPath)\*.xml" />
+    <None Remove="$(OutputPath)\*.pdb" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="GmodNET.VersionTool.SourceGenerator.props" PackagePath="buildMultiTargeting/" />
+    <Content Include="GmodNET.VersionTool.SourceGenerator.props" PackagePath="build/" />
+    <Content Include="GmodNET.VersionTool.SourceGenerator.targets" PackagePath="buildMultiTargeting/" />
+    <Content Include="GmodNET.VersionTool.SourceGenerator.targets" PackagePath="build/" />
+  </ItemGroup>
+
+</Project>
