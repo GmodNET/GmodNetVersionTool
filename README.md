@@ -46,6 +46,10 @@ The most straightforward way to use GmodNET Version Tool with .NET projects is t
 
 [GmodNET.VersionTool.MSBuild](https://www.nuget.org/packages/GmodNET.VersionTool.MSBuild/) will automatically generate version number and set `Version` and `PackageVersion` properties for each build.
 
+[GmodNET.VersionTool.SourceGenerator](https://www.nuget.org/packages/GmodNET.VersionTool.SourceGenerator/) is a C# Source Generator,
+which provides functionality similar to [GmodNET.VersionTool.MSBuild](https://www.nuget.org/packages/GmodNET.VersionTool.MSBuild/),
+but embeds build version information directly as C# code.
+
 There is a cross-platform [.NET command line tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools) implementation of GmodNET Version Tool: [GmodNET.VersionTool](https://www.nuget.org/packages/GmodNET.VersionTool/). It can be used from shell or any other build systems like make, cmake, etc.
 
 [GmodNET.VersioTool.Core](https://www.nuget.org/packages/GmodNET.VersionTool.Core/) is a NuGet package containing .NET Standard 2.0 class library which can be used to generate version numbers from other .NET applications.
