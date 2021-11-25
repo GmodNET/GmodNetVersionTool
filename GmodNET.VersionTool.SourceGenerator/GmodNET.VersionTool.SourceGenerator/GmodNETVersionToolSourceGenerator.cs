@@ -15,7 +15,7 @@ namespace GmodNET.VersionTool.SourceGenerator
                 title: "There is no version file specified",
                 messageFormat: "There is no version file specified for a project. Add <VersionFile> item to your project's ItemGroup.",
                 category: "GmodNET.VersionTool.SourceGenerator",
-                defaultSeverity: DiagnosticSeverity.Warning,
+                defaultSeverity: DiagnosticSeverity.Error,
                 isEnabledByDefault: true
             );
 
@@ -25,7 +25,7 @@ namespace GmodNET.VersionTool.SourceGenerator
                 title: "There are multiple version files specified",
                 messageFormat: "There are multiple version files specified for a project. Only single version file can be specified.",
                 category: "GmodNET.VersionTool.SourceGenerator",
-                defaultSeverity: DiagnosticSeverity.Warning,
+                defaultSeverity: DiagnosticSeverity.Error,
                 isEnabledByDefault: true
             );
 
@@ -34,7 +34,7 @@ namespace GmodNET.VersionTool.SourceGenerator
             title: "Exception was thrown by GmodNET.VersionTool.SourceGenerator",
             messageFormat: $"Exception was thrown by GmodNET.VersionTool.SourceGenerator: {e}",
             category: "GmodNET.VersionTool.SourceGenerator",
-            defaultSeverity: DiagnosticSeverity.Warning,
+            defaultSeverity: DiagnosticSeverity.Error,
             isEnabledByDefault: true
         );
 
