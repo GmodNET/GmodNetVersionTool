@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <DevelopmentDependency>true</DevelopmentDependency>
     <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <Product>GmodNET.VersionTool MSBuild task.</Product>
     <Description>An implementation of GmodNET.VersionTool as MSBuild task.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -34,6 +35,7 @@
     <Content Include="GmodNET.VersionTool.MSBuild.targets" PackagePath="buildMultiTargeting/" />
     <Content Include="GmodNET.VersionTool.MSBuild.targets" PackagePath="build/" />
     <Content Include="../icon.png" PackagePath="/" />
+    <Content Include="../README.md" Pack="true" PackagePath="/"/>
   </ItemGroup>
 
   <Target Name="PackTaskDependencies" BeforeTargets="GenerateNuspec">
