@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -38,6 +39,11 @@
 
   <ItemGroup>
     <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <None Include="$(OutputPath)\*.*" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <None Remove="$(OutputPath)\System.*.dll" />
+    <None Remove="$(OutputPath)\Microsoft.*.dll" />
+    <None Remove="$(OutputPath)\*.xml" />
+    <None Remove="$(OutputPath)\*.pdb" />
   </ItemGroup>
 
 </Project>
