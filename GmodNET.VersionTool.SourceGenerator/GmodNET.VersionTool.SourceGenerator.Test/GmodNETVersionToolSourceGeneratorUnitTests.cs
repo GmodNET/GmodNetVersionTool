@@ -71,8 +71,9 @@ namespace GmodNET.VersionTool.Info
                     },
                     AnalyzerConfigFiles =
                     {
-                        ("/.globalconfig", $@"
+                        (Path.GetFullPath("./.globalconfig"), $@"
 is_global = true
+
 [{filePath}]
 build_metadata.AdditionalFiles.IsVersionFile = true
 "),
