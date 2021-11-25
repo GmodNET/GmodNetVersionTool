@@ -2,6 +2,7 @@
 [![MSBuild Target NuGet Link](https://img.shields.io/nuget/v/GmodNET.VersionTool.MSBuild?label=MSBuild%20Target&style=plastic)](https://www.nuget.org/packages/GmodNET.VersionTool.MSBuild/)
 [![Class Library NuGet Link](https://img.shields.io/nuget/v/GmodNET.VersionTool.Core?label=Class%20Library&style=plastic)](https://www.nuget.org/packages/GmodNET.VersionTool.Core/)
 [![CLI Tool NuGet Link](https://img.shields.io/nuget/v/GmodNET.VersionTool?label=CLI%20Tool&style=plastic)](https://www.nuget.org/packages/GmodNET.VersionTool/)
+[![Source Generator NuGet Link](https://img.shields.io/nuget/v/GmodNET.VersionTool.SourceGenerator?label=C%23%20Source%20Generator)](https://www.nuget.org/packages/GmodNET.VersionTool.SourceGenerator/)
 
 A git-based [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html) compatible version number generator.
 
