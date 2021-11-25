@@ -38,14 +38,17 @@
     <Content Include="../../icon.png" PackagePath="/" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="$(OutputPath)/$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-    <None Include="$(OutputPath)/*.*" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-    <None Remove="$(OutputPath)/System.*.dll" />
-    <None Remove="$(OutputPath)/Microsoft.*.dll" />
-    <None Remove="$(OutputPath)/*.xml" />
-    <None Remove="$(OutputPath)/*.pdb" />
-  </ItemGroup>
+  <Target Name="PackTaskDependencies" BeforeTargets="GenerateNuspec">
+    <ItemGroup>
+      <_PackageFiles Include="bin/$(Configuration)/netstandard2.0/*.*">
+        <PackagePath>analyzers/dotnet/cs</PackagePath>
+      </_PackageFiles>
+      <_PackageFiles Remove="**/*.xml" />
+      <_PackageFiles Remove="**/System.*.dll" />
+      <_PackageFiles Remove="**/Microsoft.*.dll" />
+      <_PackageFiles Remove="**/*.pdb" />
+    </ItemGroup>
+  </Target>
 
   <ItemGroup>
     <Content Include="GmodNET.VersionTool.SourceGenerator.props" PackagePath="buildMultiTargeting/" />
