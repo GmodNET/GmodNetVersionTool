@@ -74,7 +74,7 @@ namespace GmodNET.VersionTool.Info
                         (Path.GetFullPath("./.globalconfig"), $@"
 is_global = true
 
-[{filePath}]
+[{filePath.Replace('\\', '/')}]
 build_metadata.AdditionalFiles.IsVersionFile = true
 "),
                     },
